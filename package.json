@@ -1,5 +1,5 @@
 {
-  "name": "placeholder",
+  "name": "lungabros",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,10 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "dev:ssr": "ng run placeholder:serve-ssr",
-    "serve:ssr": "node dist/placeholder/server/main.js",
-    "build:ssr": "ng build && ng run placeholder:server",
-    "prerender": "ng run placeholder:prerender"
+    "dev:ssr": "ng run lungabros:serve-ssr",
+    "serve:ssr": "node dist/lungabros/server/main.js",
+    "build:ssr": "ng build && ng run lungabros:server",
+    "prerender": "ng run lungabros:prerender"
   },
   "private": true,
   "dependencies": {

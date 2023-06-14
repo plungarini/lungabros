@@ -1,14 +1,14 @@
 {
   "targets": {
-    "placeholder": {
+    "lungabros": {
       "hosting": {
-        "placeholder": [
-          "placeholder"
+        "lungabros": [
+          "lungabros"
         ]
       }
     }
   },
   "projects": {
-    "default": "placeholder"
+    "default": "lungabros"
   }
 }

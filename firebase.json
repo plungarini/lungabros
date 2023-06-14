@@ -1,7 +1,7 @@
 {
   "hosting": [
     {
-      "target": "placeholder",
+      "target": "lungabros",
       "source": ".",
 			"ignore": [
 				"firebase.json",

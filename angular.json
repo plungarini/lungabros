@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "placeholder": {
+    "lungabros": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/placeholder/browser",
+            "outputPath": "dist/lungabros/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -74,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "placeholder:build:production"
+              "browserTarget": "lungabros:build:production"
             },
             "development": {
-              "browserTarget": "placeholder:build:development"
+              "browserTarget": "lungabros:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -85,7 +85,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "placeholder:build"
+            "browserTarget": "lungabros:build"
           }
         },
         "test": {
@@ -111,7 +111,7 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/placeholder/server",
+            "outputPath": "dist/lungabros/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
             "inlineStyleLanguage": "scss"
@@ -140,12 +140,12 @@
           "builder": "@nguniversal/builders:ssr-dev-server",
           "configurations": {
             "development": {
-              "browserTarget": "placeholder:build:development",
-              "serverTarget": "placeholder:server:development"
+              "browserTarget": "lungabros:build:development",
+              "serverTarget": "lungabros:server:development"
             },
             "production": {
-              "browserTarget": "placeholder:build:production",
-              "serverTarget": "placeholder:server:production"
+              "browserTarget": "lungabros:build:production",
+              "serverTarget": "lungabros:server:production"
             }
           },
           "defaultConfiguration": "development"
@@ -159,12 +159,12 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "placeholder:build:production",
-              "serverTarget": "placeholder:server:production"
+              "browserTarget": "lungabros:build:production",
+              "serverTarget": "lungabros:server:production"
             },
             "development": {
-              "browserTarget": "placeholder:build:development",
-              "serverTarget": "placeholder:server:development"
+              "browserTarget": "lungabros:build:development",
+              "serverTarget": "lungabros:server:development"
             }
           },
           "defaultConfiguration": "production"
@@ -173,9 +173,9 @@
           "builder": "@angular/fire:deploy",
           "options": {
             "version": 2,
-            "browserTarget": "placeholder:build:production",
-            "serverTarget": "placeholder:server:production",
-            "prerenderTarget": "placeholder:prerender:production"
+            "browserTarget": "lungabros:build:production",
+            "serverTarget": "lungabros:server:production",
+            "prerenderTarget": "lungabros:prerender:production"
           }
         }
       }
