@@ -36,9 +36,9 @@
             "scripts": [],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json",
-						"allowedCommonJsDependencies": [
-							"imgix-core-js"
-						]
+            "allowedCommonJsDependencies": [
+              "imgix-core-js"
+            ]
           },
           "configurations": {
             "production": {
@@ -158,7 +158,7 @@
           "options": {
             "routes": [
               "/",
-							"auth/login"
+              "auth/login"
             ]
           },
           "configurations": {

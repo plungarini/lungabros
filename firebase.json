@@ -4,12 +4,12 @@
       "target": "lungabros",
       "source": ".",
 			"ignore": [
-				"firebase.json",
-				"**/.*",
-				"**/node_modules/**"
-			],
+        "firebase.json",
+        "**/node_modules/**"
+      ],
       "frameworksBackend": {
-        "region": "europe-west1"
+        "region": "europe-west1",
+				"minInstances": 1
       }
     }
   ],
