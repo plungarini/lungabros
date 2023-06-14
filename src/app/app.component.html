@@ -10,9 +10,10 @@
   <app-footer *ngIf="!isAdminArea"></app-footer>
 </div>
 <div
+	*ngIf="($loader | async) as showLoader; else undefinedLoader"
   [ngClass]="{
-    'pointer-events-none opacity-0': !showLoader,
-    'pointer-events-auto opacity-100': showLoader
+    'pointer-events-none opacity-0': !(showLoader.show),
+    'pointer-events-auto opacity-100': (showLoader.show)
   }"
   class="z-[100] transition-all delay-100 duration-300"
 >
@@ -24,3 +25,14 @@
     />
   </div>
 </div>
+<ng-template #undefinedLoader>
+	<div class="z-[100] pointer-events-auto opacity-100 transition-all delay-100 duration-300">
+		<div class="fixed inset-0 bg-zinc-900">
+			<img
+				src="assets/logo/lungabros_light.svg"
+				class="absolute top-1/2 left-1/2 z-30 w-64 max-w-full -translate-x-1/2 -translate-y-1/2 animate-pulse object-cover px-6"
+				alt=""
+			/>
+		</div>
+	</div>
+</ng-template>
