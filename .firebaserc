@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "placeholder": {
+      "hosting": {
+        "placeholder": [
+          "placeholder"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "placeholder"
+  }
+}
