@@ -1,0 +1,61 @@
+<div class="group h-full w-full">
+  <div
+    [routerLink]="course ? 'courses/info/' + course.id : null"
+    [ngClass]="{
+      'border-t-4 border-t-amber-500': isHighlighted,
+      'animate-pulse cursor-default opacity-70 group-hover:shadow-none': !course
+    }"
+    class="relative h-full w-full cursor-pointer overflow-hidden rounded-xl border border-zinc-800 shadow-none transition-all duration-300 group-hover:shadow-2xl"
+  >
+    <div
+      class="relative scale-100 overflow-hidden transition-all duration-300 group-hover:scale-105"
+    >
+      <img
+        *ngIf="course; else noCourse"
+        ixImg
+        loading="lazy"
+        [path]="course.bgImg"
+        alt=""
+        class="z-0 aspect-video w-full max-w-full object-cover object-center"
+      />
+      <ng-template #noCourse>
+        <div class="aspect-video w-full bg-zinc-500"></div>
+      </ng-template>
+      <div
+        class="absolute top-0 left-0 z-10 h-full w-full bg-gradient-to-t from-zinc-900 transition-all duration-300"
+      ></div>
+      <div
+        [ngClass]="{
+          'opacity-100 group-hover:opacity-0': course,
+          'opacity-100 group-hover:opacity-100': !course
+        }"
+        class="absolute top-0 left-0 z-10 h-full w-full bg-gradient-to-b from-zinc-900/40 opacity-100 transition-all duration-300 group-hover:opacity-0"
+      ></div>
+    </div>
+    <div
+      [ngClass]="{
+        '-translate-y-1': isHighlighted
+      }"
+      class="relative z-20 -mt-12 px-4 pb-4"
+    >
+      <ng-container *ngIf="course; else noCourseText">
+        <p
+          *ngIf="course"
+          class="text-lg font-bold text-zinc-300 transition-all duration-300 group-hover:text-zinc-50"
+        >
+          {{ course.title }}
+        </p>
+        <p *ngIf="course" class="text-sm" [innerHtml]="course.shortDesc"></p>
+      </ng-container>
+      <ng-template #noCourseText>
+        <div class="opacity-80">
+          <p class="mb-4 h-6 w-full rounded-sm bg-zinc-300"></p>
+          <p class="mb-3 h-3 w-full rounded-sm bg-zinc-500"></p>
+          <p class="mb-3 h-3 w-full rounded-sm bg-zinc-500"></p>
+          <p class="mb-3 h-3 w-full rounded-sm bg-zinc-500"></p>
+          <p class="mb-3 h-3 w-full rounded-sm bg-zinc-500"></p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
