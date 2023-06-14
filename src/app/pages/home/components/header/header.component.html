@@ -1,0 +1,27 @@
+<div class="relative group">
+  <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
+    <img
+      ixImg
+      alt=""
+      priority
+      loading="eager"
+			(load)="loadedImg()"
+      [ngClass]="{
+        'scale-100': !loaded,
+        'scale-125': loaded
+      }"
+      path="stock/header.jpeg"
+      class="absolute top-0 left-0 w-full h-full object-cover object-center transform scale-100 transition-all"
+      style="transition-duration: 20000ms;"
+    >
+  </div>
+  <div class="relative w-full px-4 lg:px-16 m-0 pt-16 sm:pt-8 bg-gradient-to-b from-[#000000bb] to-zinc-900 backdrop-blur-sm">
+      <img ixImg class="hidden sm:block absolute left-4 top-5 w-8 md:w-16 lg:w-24 xl:w-36 opacity-50" alt="" path="logo/elements/Fish-1.svg">
+      <img ixImg class="hidden sm:block absolute top-8 -right-2 w-8 md:w-16 lg:w-24 xl:w-36 opacity-50" alt="" path="logo/elements/Fish-2.svg">
+      <img ixImg class="hidden sm:block absolute right-7 bottom-4 w-8 md:w-16 lg:w-24 xl:w-36 opacity-50" alt="" path="logo/elements/Fish-3.svg">
+      <img ixImg class="hidden sm:block absolute left-5 bottom-2 w-8 md:w-16 lg:w-24 xl:w-36 opacity-50" alt="" path="logo/elements/Fish-4.svg">
+    <div class="w-full h-full px-8 sm:px-16 md:px-36 lg:px-48 xl:px-72 py-8 sm:py-16 md:py-30">
+      <img ixImg path="logo/lungabros_light.svg" loading="eager" priority alt="" class="w-full mt-16">
+    </div>
+  </div>
+</div>
