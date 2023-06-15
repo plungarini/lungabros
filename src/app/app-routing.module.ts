@@ -7,6 +7,12 @@ const routes: Routes = [
     data: { preload: true },
     loadChildren: () =>
       import('./pages/home/home.module').then((m) => m.HomeModule),
+	},
+	{
+    path: 'contact',
+    data: { preload: true },
+    loadChildren: () =>
+      import('./pages/contact/contact.module').then((m) => m.ContactModule),
   },
 	{
     path: 'auth',
