@@ -1,3 +1,4 @@
+import * as admin from 'firebase-admin';
 import { error, warn } from 'firebase-functions/logger';
 import { onDocumentUpdated, onDocumentWritten } from "firebase-functions/v2/firestore";
 import { onCall } from "firebase-functions/v2/https";
@@ -5,6 +6,9 @@ import * as nodemailer from 'nodemailer';
 import { updateRoutes } from './courseRoutes';
 import Mail = require('nodemailer/lib/mailer');
 import SMTPTransport = require('nodemailer/lib/smtp-transport');
+
+const app = admin.initializeApp();
+export const db = app.firestore();
 
 
 export const updateCourseRoutes = onDocumentUpdated('courses', async () => {

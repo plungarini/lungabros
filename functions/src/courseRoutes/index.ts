@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { warn } from 'firebase-functions/logger';
+import { db } from '..';
 
 const owner = 'plungarini';
 const repo = 'lungabros';
@@ -8,7 +9,21 @@ const token = process.env.GITHUB_TOKEN;
 
 
 export const updateRoutes = async () => {
-	let fileContent = ''; // TODO
+	const col = await db.collection('courses').get();
+	const docs = col.docs;
+	const routes = new Set<string>();
+
+	for (let i = 0; i < docs.length; i++) {
+		const doc = docs[i];
+		if (!doc || !doc.id) return;
+		routes.add(`/courses/info/${doc.id}`);
+	}
+
+	
+	let fileContent = [...routes].join('\n');
+
+	warn(`Found ${docs.length} routes`, fileContent);
+	
 	const requestUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
 	const requestBody = {
