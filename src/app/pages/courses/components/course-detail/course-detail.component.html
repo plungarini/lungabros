@@ -1,0 +1,21 @@
+<ng-container *ngIf="course">
+  <app-course-gallery [course]="course" class="relative z-40"></app-course-gallery>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
+    <div>
+      <h3>Info sul corso</h3>
+      <div class="max-w-prose text-lg text-zinc-400" [innerHtml]="course.desc"></div>
+    </div>
+    <div>
+      <app-course-specs [course]="course"></app-course-specs>
+    </div>
+  </div>
+  
+  <app-course-certification [text]="course.howToCert" [img]="course.gallery" class="my-24"></app-course-certification>
+  <app-how-to-learn [course]="course"></app-how-to-learn>  
+  <app-course-highlights [course]="course"></app-course-highlights>
+  <app-course-advice [course]="course"></app-course-advice>
+  <app-course-suggestion [course]="course"></app-course-suggestion>
+
+</ng-container>
+
