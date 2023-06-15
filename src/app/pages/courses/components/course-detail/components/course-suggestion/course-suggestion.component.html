@@ -1,0 +1,10 @@
+<div *ngIf="course && suggestions.length > 0" class="mt-16">
+  <h3 class="text-4xl">Sei curioso? Guarda anche questi corsi 😜</h3>
+  <p class="max-w-prose">Se ti è piaciuto il "<b>{{course.title}}</b>" allora dovresti dare un'occhiata anche a questi corsi:</p>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+    <ng-container *ngFor="let item of suggestions">
+      <app-specialties-card [routerLink]="'/courses/info/' + item.id" [title]="item.title" [path]="item.bgImg"></app-specialties-card>
+    </ng-container>
+  </div>
+</div>
