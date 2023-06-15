@@ -1,0 +1,95 @@
+<div class="overflow-x-hidden md:overflow-x-visible">
+	<div class="relative isolate bg-zinc-900">
+		<div class="grid grid-cols-1 mx-auto max-w-7xl lg:grid-cols-2">
+			<div class="relative px-6 pt-24 pb-20 sm:pt-32 lg:static lg:px-8 lg:py-48">
+				<div class="max-w-xl mx-auto lg:mx-0 lg:max-w-lg">
+					<div class="absolute inset-y-0 left-0 w-full overflow-hidden -z-10 lg:w-1/2">
+						<div class="absolute -left-56 top-[calc(100%-13rem)] transform-gpu blur-3xl lg:left-[max(-14rem,calc(100%-59rem))] lg:top-[calc(50%-7rem)]" aria-hidden="true">
+							<div class="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-br from-[#80caff] to-[#4f46e5] opacity-20" style="clip-path: polygon(74.1% 56.1%, 100% 38.6%, 97.5% 73.3%, 85.5% 100%, 80.7% 98.2%, 72.5% 67.7%, 60.2% 37.8%, 52.4% 32.2%, 47.5% 41.9%, 45.2% 65.8%, 27.5% 23.5%, 0.1% 35.4%, 17.9% 0.1%, 27.6% 23.5%, 76.1% 2.6%, 74.1% 56.1%)"></div>
+						</div>
+					</div>
+					<h2 class="text-3xl font-bold tracking-tight text-white">Get in touch</h2>
+					<p class="mt-6 text-lg leading-8 text-zinc-300">Sei pronto a tuffarti in avventure subacquee incredibili? Scrivici per prenotare un corso di immersioni, fare domande strampalate o anche solo per farti dire quanto amiamo i polpi che ci salutano durante le immersioni! Non temere, la nostra pazienza è più profonda dell'oceano 😎</p>
+					<dl class="mt-10 space-y-4 text-base leading-7 text-zinc-300">
+						<div class="flex gap-x-4">
+							<dt class="flex-row items-center">
+								<span class="sr-only">Telephone</span>
+								<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" clip-rule="evenodd" d="M11.9981 7.32918C7.55059 7.33016 9.61816 10.72 6.78778 10.721C4.05762 10.7219 3 11.2328 3 7.7748C3.04281 7.38367 2.32378 3.9121 11.9981 3.91016C21.6723 3.90918 20.9572 7.38075 21 7.77091C21 11.2386 19.9424 10.718 17.2122 10.719C14.3809 10.719 16.4455 7.32918 11.9981 7.32918Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M18.56 11.0117L19.3072 16.0138C19.7664 18.38 17.804 20.0905 15.4192 20.0905H8.57045C6.18472 20.0905 4.38472 18.38 4.69996 16.0138L5.43845 11.0117" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									<path fill-rule="evenodd" clip-rule="evenodd" d="M14.2161 14.0016C14.2161 12.7776 13.2236 11.7852 11.9996 11.7852C10.7756 11.7852 9.7832 12.7776 9.7832 14.0016C9.7832 15.2256 10.7756 16.218 11.9996 16.218C13.2236 16.218 14.2161 15.2256 14.2161 14.0016Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+							</dt>
+							<dd><a class="hover:text-white" href="tel:+393317595546">+39 331 759 5546</a></dd>
+						</div>
+						<div class="flex gap-x-4">
+							<dt class="flex-row items-center pl-0.5">
+								<span class="sr-only">Email</span>
+								<svg class="w-6 h-6" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+									<g id="Iconly/Light/Message" stroke="currentColor" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+										<g id="Message" transform="translate(2.000000, 3.000000)" stroke="currentColor" stroke-width="1.5" >
+											<path d="M15.9026143,5.8511436 L11.4593272,9.46418164 C10.6198313,10.1301843 9.4387043,10.1301843 8.59920842,9.46418164 L4.11842516,5.8511436" id="Stroke-1"></path>
+											<path d="M14.9088637,17.9999789 C17.9502135,18.0083748 20,15.5095497 20,12.4383622 L20,5.57001263 C20,2.49882508 17.9502135,5.32907052e-15 14.9088637,5.32907052e-15 L5.09113634,5.32907052e-15 C2.04978648,5.32907052e-15 1.77635684e-15,2.49882508 1.77635684e-15,5.57001263 L1.77635684e-15,12.4383622 C1.77635684e-15,15.5095497 2.04978648,18.0083748 5.09113634,17.9999789 L14.9088637,17.9999789 Z" id="Stroke-3"></path>
+										</g>
+									</g>
+								</svg>
+							</dt>
+							<dd><a class="hover:text-white" href="mailto:info@lungabros.it">info@lungabros.it</a></dd>
+						</div>
+					</dl>
+				</div>
+			</div>
+			<form [formGroup]="form" (ngSubmit)="onSubmit()" class="px-6 pt-20 pb-24 sm:pb-32 lg:px-8 lg:py-48">
+				<div class="max-w-xl mx-auto lg:mr-0 lg:max-w-lg">
+					<div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+						<div>
+							<label for="first-name" class="block text-sm font-semibold leading-6 text-white">Nome</label>
+							<div class="mt-2.5">
+								<input type="text" formControlName="firstName" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6">
+							</div>
+						</div>
+						<div>
+							<label for="last-name" class="block text-sm font-semibold leading-6 text-white">Cognome</label>
+							<div class="mt-2.5">
+								<input type="text" formControlName="lastName" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6">
+							</div>
+						</div>
+						<div class="sm:col-span-2">
+							<label for="email" class="block text-sm font-semibold leading-6 text-white">Email</label>
+							<div class="mt-2.5">
+								<input type="email" formControlName="email" name="email" id="email" autocomplete="email" class="block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6">
+							</div>
+						</div>
+						<div class="sm:col-span-2">
+							<label for="phone-number" class="block text-sm font-semibold leading-6 text-white">Numero di telefono</label>
+							<div class="mt-2.5">
+								<input type="tel" formControlName="phone" name="phone-number" id="phone-number" autocomplete="tel" class="block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6">
+							</div>
+						</div>
+						<div class="sm:col-span-2">
+							<label for="message" class="block text-sm font-semibold leading-6 text-white">Messaggio</label>
+							<div class="mt-2.5">
+								<textarea formControlName="message" name="message" id="message" rows="4" class="block w-full rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<div class="flex justify-end gap-6 mt-6">
+						<button 
+							type="submit"
+							routerlink="/courses"
+							class="flex flex-row items-center px-4 py-2 text-sm font-semibold text-indigo-500 transition-all duration-200 rotate-0 bg-white rounded-md shadow-2xl cursor-pointer group ring-0 ring-indigo-300 ring-offset-2 ring-offset-indigo-300 hover:-rotate-1 hover:ring hover:ring-offset-indigo-500"
+							tabindex="0"
+						>
+							Invia il messaggio
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 -ml-4 transition-all duration-300 opacity-0 group-hover:ml-2 group-hover:opacity-100">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
+							</svg>
+						</button>
+					</div>
+					
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
