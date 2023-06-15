@@ -1,0 +1,117 @@
+<div *ngIf="course" class="grid grid-cols-1 gap-6 mt-32 mb-16 md:grid-cols-2">
+  <div class="relative">
+    <div class="relative overflow-hidden">
+      <img
+        ixImg
+        loading="lazy"
+        path="courses/learn/elearning.webp"
+        alt=""
+        class="z-0 object-cover object-center w-full max-w-full aspect-video rounded-t-xl"
+      />
+      <div
+        class="absolute top-0 left-0 z-10 w-full h-full bg-gradient-to-t from-zinc-900 to-zinc-900/40"
+      ></div>
+    </div>
+    <div class="relative z-20 px-6 pb-4 -mt-12">
+      <h3 class="text-4xl">PADI® eLearning</h3>
+      <p [innerHtml]="course.howToLearn.eLearning"></p>
+      <ul *ngIf="course.specs.specs as s">
+        <li>
+          <p *ngIf="s.elearningTime">
+            - <b>Tempo di studio:</b> ~{{ s.elearningTime.time }}
+            {{
+              s.elearningTime.unit === "hours"
+                ? "ore"
+                : s.elearningTime.unit === "days"
+                ? "giorni"
+                : s.elearningTime.unit === "minutes"
+                ? "minuti"
+                : "ore"
+            }}
+          </p>
+        </li>
+      </ul>
+      <button
+        class="flex flex-row items-center mt-4 text-indigo-400 transition-all duration-200 border-b-2 border-zinc-900 hover:border-indigo-400"
+      >
+        <span class="text-lg">Inizia ora il tuo corso</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4 ml-2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M8.25 4.5l7.5 7.5-7.5 7.5"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="relative">
+    <div class="relative overflow-hidden">
+      <img
+        ixImg
+        loading="lazy"
+        path="courses/learn/learn.jpeg"
+        alt=""
+        class="z-0 object-cover object-center w-full max-w-full aspect-video rounded-t-xl"
+      />
+      <div
+        class="absolute top-0 left-0 z-10 w-full h-full bg-gradient-to-t from-zinc-900 to-zinc-900/40"
+      ></div>
+    </div>
+    <div class="relative z-20 px-6 pb-4 -mt-12">
+      <h3 class="text-4xl">Assieme a noi</h3>
+      <p [innerHtml]="course.howToLearn.inPerson"></p>
+      <ul *ngIf="course.specs.specs as specs">
+        <li *ngIf="specs.pre">
+          <p>- <b>Prerequisiti:</b> {{ specs.pre }}</p>
+        </li>
+        <li *ngIf="specs.time">
+          <p>
+            - <b>Tempo totale del corso:</b> ~{{ specs.time.time }}
+            {{
+              specs.time.unit === "hours"
+                ? "ore"
+                : specs.time.unit === "days"
+                ? "giorni"
+                : specs.time.unit === "minutes"
+                ? "minuti"
+                : "ore"
+            }}
+          </p>
+        </li>
+        <li *ngIf="specs.age">
+          <p>- <b>Età minima:</b> {{ specs.age }} anni</p>
+        </li>
+        <li *ngIf="specs.depth">
+          <p>- <b>Profondità massima:</b> {{ specs.depth }} metri</p>
+        </li>
+      </ul>
+      <button
+        class="flex flex-row items-center mt-4 text-indigo-400 transition-all duration-200 border-b-2 border-zinc-900 hover:border-indigo-400"
+      >
+        <span class="text-lg">Conosci i tuoi istruttori</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-4 h-4 ml-2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M8.25 4.5l7.5 7.5-7.5 7.5"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
