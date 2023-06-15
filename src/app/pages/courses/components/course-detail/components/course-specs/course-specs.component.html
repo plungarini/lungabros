@@ -1,0 +1,37 @@
+<div
+  *ngIf="course?.specs?.specs as specs"
+  class="rounded-2xl border border-zinc-700/40 py-4 px-6"
+>
+  <h3>Specifiche del corso</h3>
+  <div *ngIf="specs.depth" class="grid grid-cols-2">
+    <p class="font-bold">Profondità massima:</p>
+    <p>{{ specs.depth }} metri</p>
+  </div>
+  <div *ngIf="specs.time" class="grid grid-cols-2">
+    <p class="font-bold">Durata del corso:</p>
+    <p>
+      ~{{ specs.time.time }}
+      {{
+        specs.time.unit === "hours"
+          ? "ore"
+          : specs.time.unit === "days"
+          ? "giorni"
+          : specs.time.unit === "minutes"
+          ? "minuti"
+          : "ore"
+      }}
+    </p>
+  </div>
+  <div *ngIf="specs.dives" class="grid grid-cols-2">
+    <p class="font-bold">Immersioni:</p>
+    <p>{{ specs.dives }} dives</p>
+  </div>
+  <div *ngIf="specs.age" class="grid grid-cols-2">
+    <p class="font-bold">Età minima:</p>
+    <p>{{ specs.age }} anni</p>
+  </div>
+  <div *ngIf="specs.pre" class="grid grid-cols-2">
+    <p class="font-bold">Prerequisiti:</p>
+    <p>{{ specs.pre }}</p>
+  </div>
+</div>
