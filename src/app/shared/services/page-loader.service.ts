@@ -16,9 +16,12 @@ export class PageLoaderService {
 	}
 
 	show(status: boolean): void {
-		setTimeout(() => {
-			this.$loader.next({ show: !!status });
-			console.log('Show page loader?', status)
-		}, 1000);
+		if (status) {
+			this.$loader.next({ show: status });
+		} else {
+			setTimeout(() => {
+				this.$loader.next({ show: !!status });
+			}, 1000);
+		}
 	}
 }

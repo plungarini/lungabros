@@ -36,9 +36,8 @@ export class AppComponent {
 				),
       )
 			.subscribe((e) => {
-        if (e instanceof NavigationStart) {
+				if (e instanceof NavigationStart) {
 					this.pageLoader.show(true);
-
           if (e.url.includes('admin') || e.url.includes('login')) {
             this.isAdminArea = true;
             this.cdRef.detectChanges();

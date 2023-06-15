@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { PageLoaderService } from 'src/app/shared/services/page-loader.service';
 import { SendEmailService } from 'src/app/shared/services/send-email.service';
 
 @Component({
@@ -21,9 +22,11 @@ export class ContactComponent implements OnInit {
 
 	constructor(
 		private sendEmailService: SendEmailService,
+		private pageLoader: PageLoaderService,
 	) { }
 
-  ngOnInit(): void {
+	ngOnInit(): void {
+		this.pageLoader.show(false);
 	}
 	
 	onSubmit(): void {
