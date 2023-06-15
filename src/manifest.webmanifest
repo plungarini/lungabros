@@ -1,9 +1,9 @@
 {
   "name": "lungabros",
   "short_name": "lungabros",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
-  "display": "standalone",
+  "theme_color": "#6366f1",
+  "background_color": "#18181b",
+  "display": "fullscreen",
   "scope": "./",
   "start_url": "./",
   "icons": [
