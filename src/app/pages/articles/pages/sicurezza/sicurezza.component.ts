@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { PageLoaderService } from 'src/app/shared/services/page-loader.service';
 
 @Component({
   templateUrl: './sicurezza.component.html',
@@ -21,9 +22,12 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class SicurezzaComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+		private pageLoader: PageLoaderService
+	) {}
 
-  ngOnInit(): void {
-  }
+	ngOnInit(): void {
+		this.pageLoader.show(false);
+	}
 
 }

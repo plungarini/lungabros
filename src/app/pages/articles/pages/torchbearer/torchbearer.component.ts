@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { PageLoaderService } from 'src/app/shared/services/page-loader.service';
 
 @Component({
   templateUrl: './torchbearer.component.html',
@@ -20,7 +21,13 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TorchbearerComponent implements OnInit {
-  constructor() {}
 
-  ngOnInit(): void {}
+	constructor(
+		private pageLoader: PageLoaderService
+	) {}
+
+	ngOnInit(): void {
+		this.pageLoader.show(false);
+	}
+	
 }
