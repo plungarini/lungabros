@@ -1,4 +1,4 @@
-<div class="relative group w-full h-full">
+<div class="relative w-full h-full group">
   <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
     <img
       #ix
@@ -12,14 +12,14 @@
       }"
       [imgixParams]="{ ar: '16:5', fit: 'crop' }"
       path="stock/Stock-6.jpeg"
-      class="absolute top-0 left-0 w-full h-full object-cover object-top transform scale-100 transition-all z-10"
+      class="absolute top-0 left-0 z-10 object-cover object-top w-full h-full transition-all transform scale-100"
       style="transition-duration: 20000ms;"
     >
     <div class="absolute w-full h-full bg-gradient-to-b from-[#000000bb] to-zinc-900 backdrop-blur-sm z-20"></div>
   </div>
-  <div class="relative w-full h-full m-0 pt-16 sm:pt-8 z-30">
-    <img routerLink="/" ixImg path="logo/lungabros_light_minimal.svg" loading="eager" priority alt="" class="absolute top-6 left-6 w-32 cursor-pointer hidden md:block">
-    <div class="w-full px-8 h-44 max-w-7xl py-8 sm:py-16 md:py-30 mt-16 mx-auto">
+  <div class="relative z-30 w-full h-full pt-16 m-0 sm:pt-8">
+    <img routerLink="/" ixImg path="logo/lungabros_light_minimal.svg" loading="eager" priority alt="" class="absolute hidden w-32 cursor-pointer top-6 left-6 md:block">
+    <div class="w-full px-8 py-8 mx-auto mt-16 h-44 max-w-7xl sm:py-16 md:py-30">
       
     </div>
   </div>

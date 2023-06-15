@@ -19,7 +19,7 @@ import { HighlightsComponent } from './components/highlights/highlights.componen
   imports: [
     CommonModule,
 		AboutRoutingModule,
-		ImgixAngularModule
+		ImgixAngularModule,
   ]
 })
 export class AboutModule { }
