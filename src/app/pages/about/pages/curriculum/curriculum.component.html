@@ -1,0 +1,19 @@
+<div *ngIf="curriculum" #cv>
+  <app-header imgPath="gallery/instructors.jpg" align="object-top"></app-header>
+  <ng-container *ngIf="curriculum as c">
+    <div class="mx-4 sm:mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-12 pt-16 -mt-72 relative z-30 overflow-visible">
+      <app-short-desc [name]="c.name" [desc]="c.desc" [socials]="c.specs.socials"></app-short-desc>
+    </div>
+    <div class="mx-4 sm:mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-12 shadow-2xl rounded-b-xl relative z-20 overflow-visible">
+      <app-my-story [stories]="c.stories" [specs]="c.specs" [state]="downloadState" (printPdf)="generatePdf()"></app-my-story>
+      <app-certifications [certs]="c.certs" [memberId]="c.specs.memberId"></app-certifications>
+    
+      <app-banner></app-banner>
+    </div>
+  </ng-container>
+  
+</div>
+
+<ng-container
+  #pdfContainer
+></ng-container>
