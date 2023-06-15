@@ -1,0 +1,23 @@
+<div class="relative group w-full h-full">
+  <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
+    <img
+      #ix
+      ixImg
+      alt=""
+      priority
+      loading="eager"
+      [ngClass]="{
+        'scale-100': !loaded,
+        'scale-125': loaded
+      }"
+      [imgixParams]="{ ar: '16:9', fit: 'crop' }"
+      [path]="img"
+      [class]="'absolute top-0 left-0 w-full h-full object-cover transform scale-100 transition-all z-10 ' + align"
+      style="transition-duration: 20000ms;"
+    >
+    <div class="absolute w-full h-full bg-gradient-to-b from-[#000000bb] to-zinc-900 backdrop-blur-sm z-20"></div>
+  </div>
+  <div class="relative w-full m-0 pt-16 sm:pt-8 z-30 h-96">
+    <img routerLink="/" ixImg path="logo/lungabros_light_minimal.svg" loading="eager" priority alt="" class="absolute top-6 left-6 w-32 cursor-pointer hidden md:block">
+  </div>
+</div>
