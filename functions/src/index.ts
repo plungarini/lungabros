@@ -2,6 +2,7 @@ import * as admin from 'firebase-admin';
 import { error, warn } from 'firebase-functions/logger';
 import { onDocumentUpdated, onDocumentWritten } from "firebase-functions/v2/firestore";
 import { onCall } from "firebase-functions/v2/https";
+import { setGlobalOptions } from 'firebase-functions/v2/options';
 import * as nodemailer from 'nodemailer';
 import { updateRoutes } from './courseRoutes';
 import Mail = require('nodemailer/lib/mailer');
@@ -11,15 +12,22 @@ const app = admin.initializeApp();
 export const db = app.firestore();
 
 
-export const updateCourseRoutes = onDocumentUpdated('courses', async () => {
+setGlobalOptions({
+	region: 'europe-west2',
+	concurrency: 10,
+	memory: '256MiB',
+});
+
+
+export const updateCourseRoutes = onDocumentUpdated('courses/{docId}', async () => {
 	try {
 		await updateRoutes();
 	} catch (err) {
 		error(err);
 	}
-})
+});
 
-export const writeCourseRoutes = onDocumentWritten('courses', async () => {
+export const writeCourseRoutes = onDocumentWritten('courses/{docId}', async () => {
 	try {
 		await updateRoutes();
 	} catch (err) {
@@ -34,7 +42,7 @@ export const emailContactForm = onCall<{
 	email: string;
 	phone?: string;
 	message: string;
-}, any>({ region: 'europe-west2', cors: false }, async ({ data }) => {
+}, void>({ region: 'europe-west2', cors: false }, async ({ data }) => {
 
 	const email = process.env.EMAIL_USER;
 	const pssw = process.env.EMAIL_PSSW;
