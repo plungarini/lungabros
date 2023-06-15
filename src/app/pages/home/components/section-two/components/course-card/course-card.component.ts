@@ -1,14 +1,14 @@
 import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    Input,
-    OnInit,
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	Input,
+	OnInit,
 } from '@angular/core';
 import { Course } from 'src/app/shared/models/course.model';
 
 @Component({
-  selector: 'app-course-card',
+  selector: 'app-course-card-home',
   templateUrl: './course-card.component.html',
   styles: [
     `
