@@ -13,6 +13,11 @@ const routes: Routes = [
     data: { preload: true },
     loadChildren: () =>
       import('./pages/contact/contact.module').then((m) => m.ContactModule),
+	},
+	{
+    path: 'articles',
+    loadChildren: () =>
+      import('./pages/articles/articles.module').then((m) => m.ArticlesModule),
   },
 	{
     path: 'auth',

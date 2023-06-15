@@ -159,7 +159,10 @@
             "routes": [
               "/",
               "auth/login",
-              "contact"
+              "contact",
+							"articles",
+							"articles/importanza-della-sicurezza",
+							"articles/torchbearers"
             ]
           },
           "configurations": {
