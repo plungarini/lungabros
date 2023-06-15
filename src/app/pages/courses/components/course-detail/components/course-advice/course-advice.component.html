@@ -1,0 +1,10 @@
+<div *ngIf="course && advices.length > 0" class="mt-16">
+  <h3 class="text-4xl">Hai poco tempo a disposizione? ⌛️</h3>
+  <p class="max-w-prose">Se sei in viaggio e hai poco tempo a disposizione o stai cercando un corso per bambini più piccoli di {{course.specs.specs.age}} anni dai un'occhiata a questi corsi:</p>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+    <ng-container *ngFor="let item of advices">
+      <app-specialties-card [routerLink]="'/courses/info/' + item.id" [title]="item.title" [path]="item.bgImg"></app-specialties-card>
+    </ng-container>
+  </div>
+</div>
