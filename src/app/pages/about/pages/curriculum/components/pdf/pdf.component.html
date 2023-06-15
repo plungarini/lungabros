@@ -1,0 +1,122 @@
+<!-- absolute -z-10 -->
+<div
+  [ngClass]="{
+    'absolute -z-10 h-0 overflow-hidden': !visible
+  }"
+  *ngIf="curriculum"
+  class="top-0 left-0 w-full h-full"
+>
+  <div #cv class="w-full h-full max-w-full pb-16 bg-white">
+
+    <div class="pt-8 mx-auto w-max">
+      <img src="assets/pdf/lungabros_dark.png" class="w-40 mx-auto" alt="">
+      <div class="pt-6 mt-8 border-t-2 border-zinc-200">
+        <p class="font-bold text-left text-zinc-400">Curriculum Vitae Subacqueo</p>
+        <h1 class="text-left text-zinc-900">{{curriculum.name}}</h1>
+        <p class="max-w-prose">{{curriculum.desc}}</p>
+      </div>
+    </div>
+
+    <div class="relative max-w-6xl mx-auto mt-28">
+      <div class="relative grid grid-cols-6 gap-10">
+        <div class="flex-1 w-full max-w-3xl col-span-4">
+          <h3 class="text-zinc-900">Esperienze lavorative</h3>
+          <p class="max-w-prose text-zinc-400">Ne sono passate molte per arrivare fino a qua! Ecco ciò che ho fatto negli ultimi anni:</p>
+        
+          <div class="flex flex-col pt-2 mt-8 space-y-8 border-l-2 border-zinc-200">
+            <ng-container *ngFor="let item of curriculum.stories">
+              <article *ngIf="item.desc && item.isWorkingExperience" class="relative grid items-baseline grid-cols-4 ml-6 group/article">
+                <div class="block absolute top-[1.13rem] -left-[1.95rem] w-3 h-3 scale-90 rounded-full bg-zinc-400 translate-y-2"></div>
+                <div class="relative flex flex-col items-start col-span-3 group/content">
+                  <div class="text-base font-semibold tracking-tight text-zinc-900">
+                    <p class="text-zinc-800">
+                      <span class="absolute z-20 -inset-y-6 -inset-x-4 sm:-inset-x-6 sm:rounded-2xl"></span>
+                      <span class="relative z-10">{{item.title}}</span>
+                    </p>
+                  </div>
+                  <p class="relative z-10 mt-2 text-sm text-zinc-400" [innerHtml]="item.desc"></p>
+                </div>
+                <time *ngIf="item.time as t" class="relative z-10 order-first block mt-1 mb-3 text-sm text-zinc-400" [attr.datetime]="t.toDate().getFullYear() + '-' + t.toDate().getMonth() + '-' + t.toDate().getDate()">
+                  {{normMonth(t.toDate().getMonth()) + t.toDate().getFullYear()}}
+                </time>
+              </article>
+            </ng-container>
+          </div>
+          <div class="w-full h-10 border-l-2 border-dotted border-zinc-200"></div>
+    
+        </div>
+    
+        <div *ngIf="curriculum.specs" class="block w-full max-w-full col-span-2">
+          <div class="w-full px-6 pt-4 pb-6 border rounded-lg shadow-2xl h-max border-zinc-300">
+            <p class="-mt-2 font-bold text-zinc-800">Skills lavorative:</p>
+            <ul class="mt-2 space-y-2">
+              <li *ngFor="let item of curriculum.specs.passions; let last = last" class="flex flex-row items-center">
+                <img src="assets/pdf/icons/check.png" class="w-5 h-5 translate-y-2 shrink-0" alt="">
+                <p class="mt-0 ml-2 text-base text-zinc-400">{{item}}{{last ? '.' : ';'}}</p>
+              </li>
+            </ul>
+          </div>
+    
+          <div class="w-full px-6 pt-4 pb-6 mt-6 border rounded-lg shadow-2xl h-max border-zinc-300">
+            <p class="-mt-2 font-bold text-zinc-800">Lingue che conosco:</p>
+            <ul class="mt-2 space-y-2">
+              <li *ngFor="let lang of curriculum.specs.lang" class="flex flex-row items-center">
+                <img [src]="'assets/pdf/flags/' + lang.flag + '.png'" class="w-6 mr-2 translate-y-2 rounded-sm shadow-lg shrink-0" alt="">
+                <p class="mt-0 ml-2 text-base text-zinc-400"><span class="font-bold">{{lang.name}}</span> - <span class="text-sm">{{normLangText(lang.level)}}</span></p>
+              </li>
+            </ul>
+          </div>
+    
+          <div class="w-full px-6 pt-4 pb-6 mt-6 border rounded-lg shadow-2xl h-max border-zinc-300">
+            <p class="-mt-2 font-bold text-zinc-800">Social Media:</p>
+            <div *ngFor="let social of curriculum.specs.socials" class="flex flex-row items-center mt-2 mb-2">
+              <img src="assets/pdf/social/{{social.id}}.png" class="w-6 h-6 translate-y-2 shrink-0" alt="">
+              <p class="mt-0 ml-2 text-base text-zinc-400"><span class="font-bold text-indigo-400">{{normSocial(social.id)}}</span> @{{social.username}}</p>
+            </div>
+          </div>
+    
+          <div class="w-full px-6 pt-4 pb-6 mt-6 border rounded-lg shadow-2xl h-max border-zinc-300">
+            <p class="-mt-2 font-bold text-zinc-800">Informazioni di contatto:</p>
+            <div class="flex flex-row items-center mt-2 mb-2">
+              <img src="assets/pdf/icons/email.png" class="w-6 h-6 translate-y-2 shrink-0" alt="">
+              <a class="mt-0 ml-2 text-base text-zinc-400" href="mailto:{{curriculum.contacts.email}}">{{curriculum.contacts.email}}</a>
+            </div>
+            <div class="flex flex-row items-center mb-1">
+              <img src="assets/pdf/icons/smartphone.png" class="w-6 h-6 translate-y-2 shrink-0" alt="">                         
+              <a class="mt-0 ml-2 text-base text-zinc-400" href="tel:{{curriculum.contacts.phone}}">{{curriculum.contacts.phone}}</a>
+            </div>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto mt-16">
+      <div class="flex flex-row items-center mb-6">
+        <h3 class="block text-zinc-900">Le mie certificazioni</h3>
+        <div class="block group ml-1 scale-75 text-zinc-800 translate-y-1.5">
+          <img src="assets/pdf/padi_logo.png" class="inline-block w-6 h-6 mr-2" alt="">
+          <p class="inline-block mt-0 font-bold -translate-y-2 text-zinc-800">PADI #<span class="text-indigo-500">{{curriculum.specs.memberId}}</span></p>
+        </div>
+      </div>
+    
+      <div class="flex flex-row flex-wrap gap-6">
+        <ng-container *ngFor="let cert of curriculum.certs; let i = index">
+          <div class="flex flex-col w-48">
+            <div
+              [ngClass]="{
+                'bg-slate-800/50': cert.isPro,
+                'bg-[#bbab74]': !cert.isPro
+              }"
+              class="relative w-full transition-all duration-300 border rounded-md shadow-2xl bg-slate-800/50 border-zinc-700 h-28 hover:scale-105"
+            >
+              <img [src]="cert.isPro ? 'assets/pdf/padi_logo_gold.png' : 'assets/pdf/padi_logo_colored_light.png'" class="absolute h-16 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
+            </div>
+            <p class="text-sm text-center text-zinc-400">{{cert.title}}</p>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+  </div>
+</div>
