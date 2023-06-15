@@ -1,0 +1,93 @@
+<div class="md:pr-12">
+  
+  <div class="border-b border-zinc-800 flex flex-row justify-between">
+    <h3>Filtra i risultati</h3>
+    <a (click)="clearFilters()" class="text-indigo-500 hover:text-indigo-400 cursor-pointer mt-1 transition-all duration-300">cancella</a>
+  </div>
+  
+  <form [formGroup]="form" class="mt-4">
+    <div class="mt-4">
+      <p class="text-xl text-zinc-300">Tipo di corsi:</p>
+      <fieldset class="space-y-5">
+        <legend class="sr-only">Tipo di corsi</legend>
+        <div class="relative flex items-center">
+          <div class="flex h-5 items-center cursor-pointer">
+            <input formControlName="kids" id="kids" name="kids" type="checkbox" class="h-4 w-4 rounded border-zinc-700 bg-zinc-800 text-indigo-500 focus:ring-offset-zinc-900 focus:ring-indigo-400">
+          </div>
+          <div class="ml-3 text-sm">
+            <label for="kids">
+              <p class="m-0 text-zinc-300 cursor-pointer select-none hover:text-zinc-50 transition-all duration-300">Kids (8-9 anni)</p>
+            </label>
+          </div>
+        </div>
+        <div class="relative flex items-center">
+          <div class="flex h-5 items-center cursor-pointer">
+            <input formControlName="junior" id="junior" name="junior" type="checkbox" class="h-4 w-4 rounded border-zinc-700 bg-zinc-800 text-indigo-500 focus:ring-offset-zinc-900 focus:ring-indigo-400">
+          </div>
+          <div class="ml-3 text-sm">
+            <label for="junior">
+              <p class="m-0 text-zinc-300 cursor-pointer select-none hover:text-zinc-50 transition-all duration-300">Junior (+10 anni)</p>
+            </label>
+          </div>
+        </div>
+        <div class="relative flex items-center">
+          <div class="flex h-5 items-center cursor-pointer">
+            <input formControlName="experience" id="experience" name="experience" type="checkbox" class="h-4 w-4 rounded border-zinc-700 bg-zinc-800 text-indigo-500 focus:ring-offset-zinc-900 focus:ring-indigo-400">
+          </div>
+          <div class="ml-3 text-sm">
+            <label for="experience">
+              <p class="m-0 text-zinc-300 cursor-pointer select-none hover:text-zinc-50 transition-all duration-300">Esperienze</p>
+            </label>
+          </div>
+        </div>
+        <div class="relative flex items-center">
+          <div class="flex h-5 items-center cursor-pointer">
+            <input formControlName="main" id="main" name="main" type="checkbox" class="h-4 w-4 rounded border-zinc-700 bg-zinc-800 text-indigo-500 focus:ring-offset-zinc-900 focus:ring-indigo-400">
+          </div>
+          <div class="ml-3 text-sm">
+            <label for="main">
+              <p class="m-0 text-zinc-300 cursor-pointer select-none hover:text-zinc-50 transition-all duration-300">Principali</p>
+            </label>
+          </div>
+        </div>
+        <div class="relative flex items-center">
+          <div class="flex h-5 items-center cursor-pointer">
+            <input formControlName="specialty" id="specialty" name="specialty" type="checkbox" class="h-4 w-4 rounded border-zinc-700 bg-zinc-800 text-indigo-500 focus:ring-offset-zinc-900 focus:ring-indigo-400">
+          </div>
+          <div class="ml-3 text-sm">
+            <label for="specialty">
+              <p class="m-0 text-zinc-300 cursor-pointer select-none hover:text-zinc-50 transition-all duration-300">Specialità</p>
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <div class="mt-6">
+      <p class="text-xl text-zinc-300">Immersioni / Secco:</p>
+      <fieldset class="space-y-5">
+        <legend class="sr-only">Tipo di corsi</legend>
+        <div class="relative flex items-center">
+          <div class="flex h-5 items-center cursor-pointer">
+            <input formControlName="withDives" id="withDives" name="withDives" type="checkbox" class="h-4 w-4 rounded border-zinc-700 bg-zinc-800 text-indigo-500 focus:ring-offset-zinc-900 focus:ring-indigo-400">
+          </div>
+          <div class="ml-3 text-sm">
+            <label for="withDives">
+              <p class="m-0 text-zinc-300 cursor-pointer select-none hover:text-zinc-50 transition-all duration-300">Con immersioni</p>
+            </label>
+          </div>
+        </div>
+        <div class="relative flex items-center">
+          <div class="flex h-5 items-center cursor-pointer">
+            <input formControlName="dry" id="dry" name="dry" type="checkbox" class="h-4 w-4 rounded border-zinc-700 bg-zinc-800 text-indigo-500 focus:ring-offset-zinc-900 focus:ring-indigo-400">
+          </div>
+          <div class="ml-3 text-sm">
+            <label for="dry">
+              <p class="m-0 text-zinc-300 cursor-pointer select-none hover:text-zinc-50 transition-all duration-300">A secco</p>
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </form>
+
+</div>
