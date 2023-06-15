@@ -158,7 +158,8 @@
           "options": {
             "routes": [
               "/",
-              "auth/login"
+              "auth/login",
+              "contact"
             ]
           },
           "configurations": {
