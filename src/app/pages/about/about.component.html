@@ -1,0 +1,36 @@
+<app-header></app-header>
+<div class="relative z-40 px-4 pt-16 mx-4 sm:mx-auto max-w-7xl sm:px-6 lg:px-8 xl:px-12 -mt-44">
+  <h1 class="mx-auto text-center">About Us</h1>
+  <p class="mx-auto text-center max-w-prose">
+    Siamo due fratelli che hanno scoperto la subaquea nel 2018 durante una vacanza. Non avevamo idea prima di quella vacanza che ci si potesse immergere con così tanta facilità e negli anni abbiamo trasformato la subacquea in una passione e successivamente in un lavoro. Non c'è cosa che possa renderci più fieri che condividere la nostra esperienza con persone curiose 😜 
+  </p>
+  
+  
+</div>
+<div class="relative z-40 px-4 mx-4 mt-8 shadow-2xl sm:mx-auto max-w-7xl sm:px-6 lg:px-8 xl:px-12 rounded-xl">
+  <div class="grid w-full max-w-3xl grid-cols-1 gap-8 mx-auto mb-8 md:grid-cols-2">
+    <div routerLink="pietro-lungarini" class="col-span-1 group scale-[0.8]">
+      <div class="relative w-full mx-auto cursor-pointer">
+        <div class="bottom-0 z-10 w-full mx-auto transition-all duration-300 bg-indigo-500 rounded-md shadow-2xl group-hover:bg-indigo-400 aspect-square ring-4 ring-indigo-500 ring-offset-2 ring-offset-zinc-900"></div>
+        <img loading="eager" ixImg path="gallery/pietro_overlay.png" [imgixParams]="{ ar: '1:1', fit: 'crop', crop: 'top' }" class="absolute inset-0 scale-[1.15] origin-bottom-left max-w-full z-20 rounded-b-md" alt="">
+      </div>
+      <p class="mt-4 text-base font-semibold text-center text-zinc-200">Pietro Lungarini</p>
+    </div>
+    <div routerLink="samuele-lungarini" class="col-span-1 group scale-[0.8]">
+      <div class="relative hidden w-full mx-auto cursor-pointer md:block">
+        <div class="bottom-0 z-10 w-full mx-auto transition-all duration-300 bg-indigo-500 rounded-md shadow-2xl group-hover:bg-indigo-400 aspect-square ring-4 ring-indigo-500 ring-offset-2 ring-offset-zinc-900"></div>
+        <img loading="eager" ixImg path="gallery/samuele_overlay.png" [imgixParams]="{ ar: '1:1', fit: 'crop', crop: 'top', flip: 'h' }" class="absolute inset-0 scale-[1.15] origin-bottom-right max-w-full z-20 rounded-b-md" alt="">
+      </div>
+      <div class="relative block w-full mx-auto cursor-pointer md:hidden" style="transform: scaleX(-1);">
+        <div class="bottom-0 z-10 w-full mx-auto transition-all duration-300 bg-indigo-500 rounded-md shadow-2xl group-hover:bg-indigo-400 aspect-square ring-4 ring-indigo-500 ring-offset-2 ring-offset-zinc-900"></div>
+        <img loading="eager" ixImg path="gallery/samuele_overlay.png" [imgixParams]="{ ar: '1:1', fit: 'crop', crop: 'top', flip: 'h' }" class="absolute inset-0 scale-[1.15] origin-bottom-right max-w-full z-20 rounded-b-md" alt="">
+      </div>
+      <p class="mt-4 text-base font-semibold text-center text-zinc-200">Samuele Lungarini</p>
+    </div>
+  </div>
+  <p class="font-semibold text-center underline text-zinc-100 decoration-from-font decoration-wavy decoration-indigo-400">Clicca su uno di noi due per vedere la nostra storia!</p>
+
+  <app-highlights class="mt-28"></app-highlights>
+
+  <app-banner-about></app-banner-about>
+</div>
