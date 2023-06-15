@@ -1,0 +1,2 @@
+/courses/owd
+/courses/aowd
