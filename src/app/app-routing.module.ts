@@ -9,6 +9,12 @@ const routes: Routes = [
       import('./pages/home/home.module').then((m) => m.HomeModule),
 	},
 	{
+    path: 'courses',
+    data: { preload: true },
+    loadChildren: () =>
+      import('./pages/courses/courses.module').then((m) => m.CoursesModule),
+  },
+	{
     path: 'about',
     data: { preload: true },
     loadChildren: () =>
