@@ -37,7 +37,13 @@
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json",
             "allowedCommonJsDependencies": [
-              "imgix-core-js"
+              "imgix-core-js",
+							"lodash",
+							"html2canvas",
+							"dompurify",
+							"rgbcolor",
+							"raf",
+							"core-js"
             ]
           },
           "configurations": {
