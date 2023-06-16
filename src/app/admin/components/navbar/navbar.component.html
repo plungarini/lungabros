@@ -1,0 +1,91 @@
+
+<ng-template #todo let-rla="rla">
+  <svg
+    class="text-zinc-400 group-hover:text-zinc-100 flex-shrink-0 -ml-1 h-6 w-6 transition-all duration-300"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none" viewBox="0 0 24 24"
+    stroke-width="1.5" stroke="currentColor"
+    [ngClass]="{
+      'text-zinc-100': rla,
+      'text-zinc-400 group-hover:text-zinc-100': !rla,
+      'ml-0': isMobile,
+      '-ml-1 mr-3': !isMobile
+    }"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+  </svg>
+</ng-template>
+<ng-template #courses let-rla="rla">
+  <svg
+    class="text-zinc-400 group-hover:text-zinc-100 flex-shrink-0 -ml-1 h-6 w-6 transition-all duration-300"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none" viewBox="0 0 24 24"
+    stroke-width="1.5" stroke="currentColor"
+    [ngClass]="{
+      'text-zinc-100': rla,
+      'text-zinc-400 group-hover:text-zinc-100': !rla,
+      'ml-0': isMobile,
+      '-ml-1 mr-3': !isMobile
+    }"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+  </svg>
+</ng-template>
+<ng-template #curriculum let-rla="rla">
+  <svg
+    class="text-zinc-400 group-hover:text-zinc-100 flex-shrink-0 -ml-1 h-6 w-6 transition-all duration-300"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none" viewBox="0 0 24 24"
+    stroke-width="1.5" stroke="currentColor"
+    [ngClass]="{
+      'text-zinc-100': rla,
+      'text-zinc-400 group-hover:text-zinc-100': !rla,
+      'ml-0': isMobile,
+      '-ml-1 mr-3': !isMobile
+    }"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 00-2.15-1.588H6.911a2.25 2.25 0 00-2.15 1.588L2.35 13.177a2.25 2.25 0 00-.1.661z" />
+  </svg>
+</ng-template>
+
+<nav class="flex flex-row md:flex-col w-full gap-1" aria-label="Sidebar">
+  <ng-container *ngFor="let item of nav">
+    <a
+      [routerLink]="[item.path]"
+      [ngClass]="{
+        'text-zinc-100': rla.isActive,
+        'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100': !rla.isActive,
+        'bg-zinc-700': isMobile && rla.isActive,
+        'h-full': isMobile && !rla.isActive,
+        'bg-zinc-800': (!isMobile && rla.isActive) || (isMobile && !rla.isActive)
+      }"
+      routerLinkActive
+      [routerLinkActiveOptions]="{ exact: true }"
+      #rla="routerLinkActive"
+      class="bg-zinc-800 text-zinc-100 group flex flex-1 items-center px-3 py-2 text-sm font-medium rounded-md transition-all duration-300"
+    >
+      <ng-container *ngIf="item.path === 'todo'" [ngTemplateOutlet]="todo" [ngTemplateOutletContext]="{ rla: rla.isActive }"></ng-container>
+      <ng-container *ngIf="item.path === 'courses'" [ngTemplateOutlet]="courses" [ngTemplateOutletContext]="{ rla: rla.isActive }"></ng-container>
+      <ng-container *ngIf="item.path === 'cv'" [ngTemplateOutlet]="curriculum" [ngTemplateOutletContext]="{ rla: rla.isActive }"></ng-container>
+      <span
+        [ngClass]="{
+          'opacity-100 w-max ml-3 pointer-events-none': isMobile && rla.isActive,
+          'opacity-0 w-0 pointer-events-auto': isMobile && !rla.isActive,
+          'mr-10': !isMobile
+        }"
+        class="truncate"
+      >{{item.name}}</span>
+
+      <span
+        *ngIf="!isMobile"
+        [ngClass]="{
+          'bg-zinc-700': rla.isActive,
+          'bg-zinc-800 group-hover:bg-zinc-700': !rla.isActive,
+          'opacity-0': !getCount(item.path),
+          'opacity-100': getCount(item.path)
+        }"
+        class="bg-zinc-700 ml-auto inline-block py-0.5 px-3 text-xs rounded-full transition-all duration-300"
+      >{{getCount(item.path)}}</span>
+    </a>
+  </ng-container>
+</nav>
