@@ -5,7 +5,7 @@ import { db } from '..';
 const owner = 'plungarini';
 const repo = 'lungabros';
 const routesFilePath = 'routes.txt';
-const sitemapPath = 'src/assets/sitemap.xml';
+const sitemapPath = 'src/sitemap.xml';
 const token = process.env.GITHUB_TOKEN;
 
 export const updateRoutes = async () => {
@@ -39,7 +39,7 @@ export const updateRoutes = async () => {
 		
 		if (currentContent === fileContent) {
       warn('The content is already up to date. Skipping the update.');
-      return;
+      return await updateSitemap([...routes]);;
 		}
 		
 		warn('Content is different, updating file on GitHub...');
@@ -58,7 +58,7 @@ export const updateRoutes = async () => {
       },
     });
 
-		warn('Routes updated successfully, updating sitemap...');
+		warn('Routes updated successfully');
 		await updateSitemap([...routes]);
   } catch (err) {
     const message = (err as any)?.response?.data?.message;
@@ -77,6 +77,8 @@ const defaultRoutes = [
 ];
 
 const updateSitemap = async (coursesRoutes: Array<string>) => {
+	warn('Updating sitemap...');
+
 	const newSitemapRoutes = [
 		...defaultRoutes,
 		...coursesRoutes
