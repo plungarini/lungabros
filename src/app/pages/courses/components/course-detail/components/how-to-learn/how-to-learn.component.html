@@ -15,7 +15,7 @@
     <div class="relative z-20 px-6 pb-4 -mt-12">
       <h3 class="text-4xl">PADI® eLearning</h3>
       <p [innerHtml]="course.howToLearn.eLearning"></p>
-      <ul *ngIf="course.specs.specs as s">
+      <ul *ngIf="course?.specs?.specs as s">
         <li>
           <p *ngIf="s.elearningTime">
             - <b>Tempo di studio:</b> ~{{ s.elearningTime.time }}
@@ -68,7 +68,7 @@
     <div class="relative z-20 px-6 pb-4 -mt-12">
       <h3 class="text-4xl">Assieme a noi</h3>
       <p [innerHtml]="course.howToLearn.inPerson"></p>
-      <ul *ngIf="course.specs.specs as specs">
+      <ul *ngIf="course?.specs?.specs as specs">
         <li *ngIf="specs.pre">
           <p>- <b>Prerequisiti:</b> {{ specs.pre }}</p>
         </li>
