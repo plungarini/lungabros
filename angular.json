@@ -166,6 +166,8 @@
 						"guessRoutes": false,
 						"routesFile": "routes.txt",
 						"numProcesses": 10,
+						"browserTarget": "lungabros:build:production",
+    				"serverTarget": "lungabros:server:production",
             "routes": [
               "/",
               "auth/login",
