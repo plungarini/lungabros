@@ -82,7 +82,7 @@ const updateSitemap = async (coursesRoutes: Array<string>) => {
 	const newSitemapRoutes = [
 		...defaultRoutes,
 		...coursesRoutes
-			.map((r) => ({ url: `https://lungabros.it/${r}`, priority: 0.8 }))
+			.map((r) => ({ url: `https://lungabros.it${r}`, priority: 0.8 }))
 	];
 
 	let sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
