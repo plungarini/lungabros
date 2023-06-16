@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Subscription, filter } from 'rxjs';
 import { PageLoaderService } from '../shared/services/page-loader.service';
+import { PersonalMetaTagsService } from '../shared/services/personal-meta-tags.service';
 
 @Component({
   selector: 'app-auth',
@@ -14,22 +14,26 @@ export class AuthComponent implements OnInit, OnDestroy {
   routerSub: Subscription | undefined;
 
   constructor(
-    private pageTitle: Title,
     private router: Router,
 		private route: ActivatedRoute,
 		private pageLoader: PageLoaderService,
+		private meta: PersonalMetaTagsService,
   ) { }
 
 	ngOnInit(): void {
 		this.pageLoader.show(false);
-    this.pageTitle.setTitle(`LUNGABROS | Login`);
+		this.meta.update({
+			title: 'Login',
+		})
     this.routerSub = this.router.events
       .pipe(
-        filter((event) => event instanceof NavigationStart),
+        filter((event) => event instanceof NavigationStart || event instanceof NavigationEnd),
       ).subscribe(e => {
-        if (e instanceof NavigationStart) {
+        if (e instanceof NavigationStart || e instanceof NavigationEnd) {
           if (e.url.includes('login')) {
-            this.pageTitle.setTitle(`LUNGABROS | Admin Login`);
+						this.meta.update({
+							title: 'Login',
+						})
           }
         }
       });

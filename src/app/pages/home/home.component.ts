@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { PersonalMetaTagsService } from 'src/app/shared/services/personal-meta-tags.service';
 
 @Component({
   selector: 'app-home',
@@ -10,9 +10,11 @@ import { Title } from '@angular/platform-browser';
 export class HomeComponent {
 
 	constructor(
-		private titleService: Title,
+		private meta: PersonalMetaTagsService,
 	) {
-		this.titleService.setTitle(`LUNGABROS`);
+		this.meta.update({
+			title: 'Your diving experience.',
+		})
 	}
 
 }

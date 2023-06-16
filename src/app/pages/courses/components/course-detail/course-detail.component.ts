@@ -25,7 +25,11 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
     this.courseSub = this.route.data.subscribe(({ course }) => {
 			if (!course) return;
       this.course = this.normCourse(course);
-      this.headerService.setHeader(this.course.title, this.course.bgImg);
+			this.headerService.setHeader({
+				title: this.course.title,
+				bgImg: this.course.bgImg,
+				description: this.course.shortDesc,
+			});
       this.cdRef.detectChanges();
 			this.pageLoader.show(false);
     });

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PageLoaderService } from 'src/app/shared/services/page-loader.service';
+import { PersonalMetaTagsService } from 'src/app/shared/services/personal-meta-tags.service';
 import { SendEmailService } from 'src/app/shared/services/send-email.service';
 
 @Component({
@@ -18,18 +19,23 @@ export class ContactComponent implements OnInit {
 		email: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
 		phone: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
 		message: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
-	})
+	});
+	
 
 	constructor(
 		private sendEmailService: SendEmailService,
 		private pageLoader: PageLoaderService,
+		private meta: PersonalMetaTagsService,
 	) { }
 
 	ngOnInit(): void {
 		this.pageLoader.show(false);
+		this.meta.update({
+			title: 'Get in touch',
+		})
 	}
 	
-	onSubmit(): void {
+	async onSubmit(): Promise<void> {
 		console.log(this.form.value);
 		const {
 			firstName,
@@ -47,16 +53,16 @@ export class ContactComponent implements OnInit {
 		) return;
 
 		try {
-			const res = this.sendEmailService.send({
+			const res = await this.sendEmailService.send({
 				firstName,
 				lastName,
 				email,
 				phone,
 				message
 			});
-			console.warn(res);
-		} catch (error) {
-			console.error(error);
+			console.log(res);
+		} catch (err) {
+			console.error(err);
 		}
 	}
 

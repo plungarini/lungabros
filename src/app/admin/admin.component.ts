@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { NavigationStart, Router } from '@angular/router';
-import { filter, Subscription } from 'rxjs';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { Subscription, filter } from 'rxjs';
+import { PersonalMetaTagsService } from '../shared/services/personal-meta-tags.service';
 import { TodoService } from './pages/todo/services/todo.service';
 
 @Component({
@@ -16,20 +16,24 @@ export class AdminComponent implements OnInit, OnDestroy {
   dbConnection: Subscription | undefined;
 
   constructor(
-    private pageTitle: Title,
     private router: Router,
     private tasksService: TodoService,
-    private cdRef: ChangeDetectorRef
+		private cdRef: ChangeDetectorRef,
+		private meta: PersonalMetaTagsService,
   ) {}
 
   ngOnInit(): void {
-    this.pageTitle.setTitle(`LUNGABROS | Admin Panel`);
+    this.meta.update({
+			title: 'Admin panel'
+		})
     this.routerSub = this.router.events
-      .pipe(filter((event) => event instanceof NavigationStart))
+      .pipe(filter((event) => (event instanceof NavigationStart || event instanceof NavigationEnd)))
       .subscribe((e) => {
-        if (e instanceof NavigationStart) {
+        if (e instanceof NavigationStart || e instanceof NavigationEnd) {
           if (e.url.includes('admin')) {
-            this.pageTitle.setTitle(`LUNGABROS | Admin Panel`);
+            this.meta.update({
+							title: 'Admin panel'
+						})
           }
         }
       });

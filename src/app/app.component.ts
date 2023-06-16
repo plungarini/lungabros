@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { NavigationEnd, NavigationStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription, filter } from 'rxjs';
 import { PageLoaderService } from './shared/services/page-loader.service';
+import { PersonalMetaTagsService } from './shared/services/personal-meta-tags.service';
 
 @Component({
   selector: 'app-root',
@@ -20,13 +20,16 @@ export class AppComponent {
   private showNavbarSubject = new BehaviorSubject<boolean>(false);
 	
 	constructor(
-    private titleService: Title,
+		private meta: PersonalMetaTagsService,
     private router: Router,
 		private pageLoader: PageLoaderService,
 	) {
+		this.meta.init({
+			description: 'Esplora le meraviglie del mondo subacqueo con LungaBros: corsi PADI, istruttori qualificati e passione per la sicurezza e la preservazione degli oceani.'
+		});
+
 		this.showNavBar$ = this.showNavbarSubject.asObservable();
 		this.$loader = this.pageLoader.get();
-		this.titleService.setTitle(`LUNGABROS`);
 		
     this.routerSub = this.router.events
 			.pipe(
