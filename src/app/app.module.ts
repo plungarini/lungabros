@@ -41,7 +41,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    provideFunctions(() => getFunctions()),
+    provideFunctions(() => getFunctions(undefined, 'europe-west2')),
 		provideStorage(() => getStorage()),
 		
 		// Dependencies
