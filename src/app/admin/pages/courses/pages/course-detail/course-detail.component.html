@@ -1,0 +1,757 @@
+<app-form-error-modal-courses
+  [(show)]="showErrorsModal"
+  [invalidInputs]="invalidInputs"
+  (saveDraft)="submitForm('draft')"
+></app-form-error-modal-courses>
+
+<div class="flex flex-col gap-2 md:flex-row md:items-end md:gap-4">
+  <h3 *ngIf="!!course" class="mt-0 mb-0">Modifica il corso</h3>
+  <h3 *ngIf="!course" class="mt-0 mb-0">Inserisci un nuovo corso</h3>
+
+  <p *ngIf="course?.draft" class="mb-0.5 mt-0 text-sm text-zinc-500">
+    (Stai guardando una bozza,
+    <a class="text-sm text-indigo-200 cursor-pointer" (click)="deleteDraft()"
+      >ripristina originale</a
+    >)
+  </p>
+</div>
+
+<form [formGroup]="form" class="w-full mt-8">
+  <div class="flex flex-col flex-1 w-full gap-4">
+    <div class="flex flex-col items-start flex-1 gap-4 md:flex-row">
+      <div class="flex-1 w-full">
+        <label for="title">Nome del corso</label>
+        <input
+          formControlName="title"
+          name="title"
+          id="title"
+          type="text"
+          placeholder="Inserisci un nome"
+          required
+          autocomplete="off"
+          aria-autocomplete="none"
+        />
+      </div>
+      <div class="flex-1 w-full">
+        <label for="id">SLUG (URL) del corso</label>
+        <input
+          formControlName="id"
+          name="id"
+          id="id"
+          type="text"
+          placeholder="Es: open-water"
+          required
+          autocomplete="off"
+          aria-autocomplete="none"
+        />
+      </div>
+      <div *ngIf="false" class="flex-1 w-full">
+        <label for="id">Stato</label>
+        <div class="flex flex-row items-center">
+          <button
+            type="button"
+            (click)="setPublishStatus(false)"
+            [ngClass]="{
+              'bg-zinc-800 text-zinc-100 ring-inset hover:bg-zinc-700 hover:ring-2':
+                publishCourse,
+              'bg-amber-500 text-zinc-900': !publishCourse
+            }"
+            class="px-4 py-2 transition-all duration-300 cursor-pointer rounded-l-md ring-amber-500"
+          >
+            Nascondi
+          </button>
+          <button
+            type="button"
+            (click)="setPublishStatus(true)"
+            [ngClass]="{
+              'bg-zinc-800 text-zinc-100 ring-inset hover:bg-zinc-700 hover:ring-2':
+                !publishCourse,
+              'bg-teal-500 text-zinc-900': publishCourse
+            }"
+            class="px-4 py-2 transition-all duration-300 cursor-pointer rounded-r-md ring-teal-500"
+          >
+            Pubblicato
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col items-start flex-1 gap-4 md:flex-row">
+      <div class="flex-1 w-full">
+        <label for="shortDesc">Breve descrizione</label>
+        <textarea
+          formControlName="shortDesc"
+          name="shortDesc"
+          id="shortDesc"
+          type="text"
+          rows="5"
+          placeholder="Inserisci una breve descrizione. Questa comparirà come anteprima nella lista dei corsi..."
+          autocomplete="off"
+          aria-autocomplete="none"
+        ></textarea>
+      </div>
+      <div class="flex-1 w-full">
+        <label for="desc">Descrizione completa</label>
+        <textarea
+          formControlName="desc"
+          name="desc"
+          id="desc"
+          type="text"
+          rows="5"
+          placeholder="Inserisci la descrizione completa di un corso. Gli spazi 'a capo' verranno elaborati automaticamente (non inserire <br>)."
+          autocomplete="off"
+          aria-autocomplete="none"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="flex flex-col items-start flex-1 gap-4 md:flex-row">
+      <div class="flex-1 w-full">
+        <label for="howToCert"
+          >Sezione "Come ottenere la tua certificazione"</label
+        >
+        <textarea
+          formControlName="howToCert"
+          name="howToCert"
+          id="howToCert"
+          type="text"
+          rows="3"
+          placeholder="Questo è un testo che si trova nella sezione del corso chiamata “Come ottenere la tua certificazione”."
+          autocomplete="off"
+          aria-autocomplete="none"
+        ></textarea>
+      </div>
+    </div>
+
+    <div
+      formGroupName="howToLearn"
+      class="flex flex-col items-start flex-1 gap-4 md:flex-row"
+    >
+      <div class="flex-1 w-full">
+        <label for="eLearning">Imparare dall'eLearning</label>
+        <textarea
+          formControlName="eLearning"
+          name="eLearning"
+          id="eLearning"
+          type="text"
+          rows="5"
+          placeholder="Sotto alla sezione “Come ottenere la tua certificazione” troverai due sezioni. Inserisci qui il paragrafo relativo all'eLearning"
+          autocomplete="off"
+          aria-autocomplete="none"
+        ></textarea>
+      </div>
+      <div class="flex-1 w-full">
+        <label for="inPerson">Imparare con un istruttore</label>
+        <textarea
+          formControlName="inPerson"
+          name="inPerson"
+          id="inPerson"
+          type="text"
+          rows="5"
+          placeholder="Sotto alla sezione “Come ottenere la tua certificazione” troverai due sezioni. Inserisci qui il paragrafo relativo alle lezioni con l'istruttore"
+          autocomplete="off"
+          aria-autocomplete="none"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="mt-6 mb-6">Specifiche del corso</h3>
+  <div formGroupName="specs" class="flex flex-col flex-1 w-full gap-4">
+    <div formGroupName="specs" class="flex flex-col flex-1 w-full gap-4">
+      <div class="flex flex-col items-start gap-4 md:flex-row">
+        <div formGroupName="time" class="w-full">
+          <label for="time">Tempo totale del corso</label>
+          <div class="flex flex-row w-full gap-2">
+            <input
+              formControlName="time"
+              name="time"
+              id="time"
+              type="text"
+              placeholder="Inserisci una durata"
+              required
+              autocomplete="off"
+              aria-autocomplete="none"
+            />
+            <select
+              class="pl-4 pr-10"
+              formControlName="unit"
+              name="unit"
+              id="unit"
+            >
+              <option value="hours">Ore</option>
+              <option value="days">Giorni</option>
+              <option value="minutes">Minuti</option>
+            </select>
+          </div>
+        </div>
+
+        <div formGroupName="elearningTime" class="w-full">
+          <label for="elearningTime">Tempo dell'eLearning</label>
+          <div class="flex flex-row w-full gap-2">
+            <input
+              formControlName="time"
+              name="time"
+              id="time"
+              type="text"
+              placeholder="Inserisci una durata"
+              required
+              autocomplete="off"
+              aria-autocomplete="none"
+            />
+            <select
+              class="pl-4 pr-10"
+              formControlName="unit"
+              name="unit"
+              id="unit"
+            >
+              <option value="hours">Ore</option>
+              <option value="days">Giorni</option>
+              <option value="minutes">Minuti</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-start gap-4 md:flex-row">
+        <div class="flex-1 w-full">
+          <label for="dives">N° immersioni (opzionale)</label>
+          <input
+            formControlName="dives"
+            name="dives"
+            id="dives"
+            type="number"
+            placeholder="Immersioni minime"
+            autocomplete="off"
+            aria-autocomplete="none"
+          />
+        </div>
+        <div class="flex-1 w-full">
+          <label for="depth">Profondità massima (opzionale)</label>
+          <input
+            formControlName="depth"
+            name="depth"
+            id="depth"
+            type="number"
+            placeholder="Profondità in metri"
+            autocomplete="off"
+            aria-autocomplete="none"
+          />
+        </div>
+        <div class="flex-1 w-full">
+          <label for="age">Età minima (opzionale)</label>
+          <input
+            formControlName="age"
+            name="age"
+            id="age"
+            type="number"
+            placeholder="Età minima"
+            autocomplete="off"
+            aria-autocomplete="none"
+          />
+        </div>
+      </div>
+
+      <div class="flex flex-col items-start gap-4 md:flex-row">
+        <div class="flex-1 w-full">
+          <label for="pre">Prerequisiti</label>
+          <input
+            formControlName="pre"
+            name="pre"
+            id="pre"
+            type="string"
+            placeholder="Inserisci i prerequisiti"
+            required
+            autocomplete="off"
+            aria-autocomplete="none"
+          />
+        </div>
+
+        <div class="flex-1 w-full">
+          <label>Categorie del corso</label>
+          <ng-container *ngFor="let cat of allCategories">
+            <span
+              *ngIf="normCategoryName(cat)"
+              (click)="selectCategory(cat)"
+              [ngClass]="{
+                'cursor-pointer bg-zinc-800 text-zinc-300 ring-zinc-600 hover:bg-zinc-600 hover:ring-2':
+                  !isCatSelected(cat),
+                'bg-indigo-100 text-indigo-700 ring-indigo-500':
+                  isCatSelected(cat)
+              }"
+              class="my-1 mr-2 inline-flex items-center rounded-full bg-indigo-100 py-0.5 pl-2 pr-0.5 text-xs font-medium text-indigo-700 ring-1 transition-all duration-300"
+            >
+              {{ normCategoryName(cat) }}
+              <button
+                type="button"
+                [ngClass]="{
+                  '-ml-2.5 opacity-0': !isCatSelected(cat),
+                  'ml-0.5 opacity-100': isCatSelected(cat)
+                }"
+                (click)="removeCat(cat, $event)"
+                class="ml-0.5 inline-flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full text-indigo-400 transition-all duration-300 hover:bg-indigo-200 hover:text-indigo-500 focus:bg-indigo-500 focus:text-white focus:outline-none"
+              >
+                <svg
+                  class="w-2 h-2"
+                  stroke="currentColor"
+                  fill="none"
+                  viewBox="0 0 8 8"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-width="1.5"
+                    d="M1 1l6 6m0-6L1 7"
+                  />
+                </svg>
+              </button>
+            </span>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col items-start gap-4 md:flex-row">
+      <div formArrayName="foryou" class="flex-1 w-full">
+        <label>Questo corso fa per te se vuoi:</label>
+        <div
+          *ngFor="let item of specsForyou; let i = index"
+          class="relative w-full group"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="absolute w-5 h-5 -translate-y-1/2 left-2 top-1/2"
+          >
+            <path
+              class="stroke-zinc-400"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"
+            />
+          </svg>
+          <input
+            placeholder="Inserisci una voce..."
+            [formControlName]="i"
+            autocomplete="off"
+            aria-autocomplete="none"
+            class="relative pl-10 pr-10 transparent"
+          />
+          <div
+            (mousedown)="deleteFormStrArr(['specs', 'foryou'], i)"
+            class="absolute transition-all duration-300 -translate-y-1/2 opacity-0 cursor-pointer right-2 top-1/2 w-max text-zinc-700 hover:text-red-400 group-focus-within:text-zinc-400 group-focus-within:opacity-100 group-focus-within:hover:text-red-400 group-hover:opacity-100"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12l2.25-2.25M14.25 12L12 14.25m-2.58 4.92l-6.375-6.375a1.125 1.125 0 010-1.59L9.42 4.83c.211-.211.498-.33.796-.33H19.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9.284c-.298 0-.585-.119-.796-.33z"
+              />
+            </svg>
+          </div>
+        </div>
+        <a
+          class="block mt-4 text-sm text-indigo-400 transition-all duration-300 cursor-pointer w-max hover:text-indigo-50"
+          (click)="newDummyFormStrArr(['specs', 'foryou'])"
+          >Aggiungi una voce</a
+        >
+      </div>
+
+      <div formArrayName="learnto" class="flex-1 w-full">
+        <label for="desc">In questo corso imparerai a:</label>
+        <div
+          *ngFor="let item of specsLearnto; let i = index"
+          class="relative w-full group"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="absolute w-5 h-5 -translate-y-1/2 left-2 top-1/2"
+          >
+            <path
+              class="stroke-zinc-400"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"
+            />
+          </svg>
+          <input
+            placeholder="Inserisci una voce..."
+            [formControlName]="i"
+            autocomplete="off"
+            aria-autocomplete="none"
+            class="relative pl-10 pr-10 transparent"
+          />
+          <div
+            (mousedown)="deleteFormStrArr(['specs', 'learnto'], i)"
+            class="absolute transition-all duration-300 -translate-y-1/2 opacity-0 cursor-pointer right-2 top-1/2 w-max text-zinc-700 hover:text-red-400 group-focus-within:text-zinc-400 group-focus-within:opacity-100 group-focus-within:hover:text-red-400 group-hover:opacity-100"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12l2.25-2.25M14.25 12L12 14.25m-2.58 4.92l-6.375-6.375a1.125 1.125 0 010-1.59L9.42 4.83c.211-.211.498-.33.796-.33H19.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9.284c-.298 0-.585-.119-.796-.33z"
+              />
+            </svg>
+          </div>
+        </div>
+        <a
+          class="block mt-4 text-sm text-indigo-400 transition-all duration-300 cursor-pointer w-max hover:text-indigo-50"
+          (click)="newDummyFormStrArr(['specs', 'learnto'])"
+          >Aggiungi una voce</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <h3 class="mt-6">Corsi Correlati</h3>
+  <p class="mt-0 mb-4 text-base"
+    >"Corsi parziali" serve per corsi come Open e Advance che hanno dei corsi
+    parziali (tipo Scuba Diver o Adventure Diver)</p
+  >
+  <div class="flex flex-col flex-1 w-full gap-4">
+    <ng-template #courseSuggestionBadge let-item="item" let-path="path">
+      <span
+        *ngIf="item"
+        [ngClass]="{}"
+        class="my-1 mr-2 inline-flex items-center rounded-full bg-indigo-100 py-0.5 pl-2 pr-0.5 text-xs font-medium text-indigo-700 ring-1 ring-indigo-500 transition-all duration-300"
+      >
+        {{ normSuggestedCoursesName(item) }}
+        <button
+          type="button"
+          (click)="removeSuggestedCourse(item, path, $event)"
+          class="ml-0.5 inline-flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full text-indigo-400 transition-all duration-300 hover:bg-indigo-200 hover:text-indigo-500 focus:bg-indigo-500 focus:text-white focus:outline-none"
+        >
+          <svg
+            class="w-2 h-2"
+            stroke="currentColor"
+            fill="none"
+            viewBox="0 0 8 8"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-width="1.5"
+              d="M1 1l6 6m0-6L1 7"
+            />
+          </svg>
+        </button>
+      </span>
+    </ng-template>
+    <ng-template #noSuggestedCourses>
+      <p class="mt-0 text-sm text-zinc-600">Nessun corso selezionato</p>
+    </ng-template>
+    <ng-template #suggestionSearch let-path="path">
+      <div class="mb-4" #comboboxContainer>
+        <div class="relative mt-1 group">
+          <input
+            #search
+            (focus)="filterSuggestedCourse('', search)"
+            (input)="filterSuggestedCourse(search.value)"
+            id="combobox-{{ path }}"
+            type="text"
+            role="combobox"
+            placeholder="Cerca un corso..."
+            [attr.aria-controls]="'options-' + path"
+          />
+          <button
+            type="button"
+            class="absolute inset-y-0 right-0 flex items-center px-2 rounded-r-md focus:outline-none"
+          >
+            <svg
+              class="w-5 h-5 text-zinc-400"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+
+          <ul
+            class="absolute top-0 z-10 w-full py-1 mt-1 overflow-auto text-base transition-all duration-300 bg-white rounded-md shadow-lg opacity-0 pointer-events-none max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none group-focus-within:pointer-events-auto group-focus-within:top-12 group-focus-within:opacity-100 sm:text-sm"
+            id="options-{{ path }}"
+            role="listbox"
+          >
+            <ng-container
+              *ngIf="filteredCourses.length; else noFilteredCourses"
+            >
+              <ng-container *ngFor="let item of filteredCourses; let i = index">
+                <li
+                  role="option"
+                  tabindex="-1"
+                  (click)="selectSuggestedCourse(item.id, path)"
+                  [attr.aria-selected]="
+                    isSuggestedCourseSelected(item.id, path)
+                  "
+                  id="option-{{ path }}-{{ i }}"
+                  [ngClass]="{
+                    'text-zinc-900 hover:bg-zinc-200':
+                      !isSuggestedCourseSelected(item.id, path),
+                    'bg-indigo-600 text-white': isSuggestedCourseSelected(
+                      item.id,
+                      path
+                    )
+                  }"
+                  class="relative py-2 pl-3 transition-all duration-300 cursor-pointer select-none pr-9 text-zinc-900"
+                >
+                  <span
+                    [ngClass]="{
+                      'font-semibold': isSuggestedCourseSelected(item.id, path)
+                    }"
+                    class="block truncate"
+                    >{{ item.title.replace("PADI®", "").trim() }}</span
+                  >
+
+                  <span
+                    [ngClass]="{
+                      'text-white opacity-100': isSuggestedCourseSelected(
+                        item.id,
+                        path
+                      ),
+                      'opacity-0': !isSuggestedCourseSelected(item.id, path)
+                    }"
+                    class="absolute inset-y-0 right-0 flex items-center pr-4 transition-all duration-300"
+                  >
+                    <svg
+                      class="w-5 h-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                </li>
+              </ng-container>
+            </ng-container>
+            <ng-template #noFilteredCourses>
+              <li
+                role="option"
+                tabindex="-1"
+                [attr.aria-selected]="false"
+                class="relative py-2 pl-3 transition-all duration-300 cursor-pointer select-none pr-9 text-zinc-700"
+              >
+                <span class="block font-semibold truncate"
+                  >Nessun risultato...</span
+                >
+              </li>
+            </ng-template>
+          </ul>
+        </div>
+      </div>
+    </ng-template>
+
+    <div class="flex flex-col items-start gap-4 md:flex-row">
+      <div class="flex-1 w-full">
+        <label for="combobox-advice">Corsi parziali</label>
+        <ng-container
+          [ngTemplateOutlet]="suggestionSearch"
+          [ngTemplateOutletContext]="{ path: 'advice' }"
+        ></ng-container>
+        <ng-container *ngIf="courseAdvices.length; else noSuggestedCourses">
+          <ng-container
+            *ngFor="let item of courseAdvices"
+            [ngTemplateOutlet]="courseSuggestionBadge"
+            [ngTemplateOutletContext]="{ item, path: 'advice' }"
+          ></ng-container>
+        </ng-container>
+      </div>
+
+      <div class="flex-1 w-full">
+        <label for="combobox-suggest">Corsi consigliati</label>
+        <ng-container
+          [ngTemplateOutlet]="suggestionSearch"
+          [ngTemplateOutletContext]="{ path: 'suggest' }"
+        ></ng-container>
+        <ng-container *ngIf="suggestedCourses.length; else noSuggestedCourses">
+          <ng-container
+            *ngFor="let item of suggestedCourses"
+            [ngTemplateOutlet]="courseSuggestionBadge"
+            [ngTemplateOutletContext]="{ item, path: 'suggest' }"
+          ></ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="mt-6">Galleria immagini</h3>
+  <label class="pb-6"
+    >Clicca sull'icona blu sopra le immagini caricate per impostare la cover del
+    corso.</label
+  >
+  <div class="flex flex-col flex-1 w-full gap-4">
+    <div class="block w-full">
+      <input
+        #fileInput
+        (change)="fileDrop([], $event)"
+        id="fileDropper"
+        name="fileDropper"
+        type="file"
+        class="hidden"
+        multiple
+        accept="image/*"
+      />
+      <label for="fileDropper" class="block cursor-pointer no-style">
+        <div
+          dragNdrop
+          (files)="fileDrop($event)"
+          [classesDrag]="['border-zinc-100', 'bg-zinc-800']"
+          [classesNorm]="['border-zinc-400', 'bg-zinc-900']"
+          class="relative block w-full p-12 text-center border-2 border-dashed rounded-lg border-zinc-400 hover:border-zinc-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-12 h-12 mx-auto text-zinc-400"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+            />
+          </svg>
+          <span class="block mt-2 text-sm font-medium text-zinc-100"
+            >Clicca o droppa una o più immagini</span
+          >
+        </div>
+      </label>
+      <ul class="flex flex-row flex-wrap w-full gap-2 mt-4">
+        <li *ngFor="let img of gallery; let i = index">
+          <div
+            [ngClass]="{
+              'ring-2 md:scale-100': isGalleryImageCover(i),
+              'ring-0 md:scale-95': !isGalleryImageCover(i)
+            }"
+            class="relative transition-all duration-300 rounded-md shadow-lg group w-28 ring-0 ring-indigo-500 md:scale-95 md:hover:scale-100"
+          >
+            <svg
+              *ngIf="!isGalleryImageCover(i)"
+              (click)="setCoverImage(i)"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="absolute z-10 w-5 h-5 px-1 py-1 text-indigo-500 transition-all duration-300 rounded-full cursor-pointer top-1 left-1 bg-white/80 backdrop-blur hover:bg-white hover:text-indigo-400 md:opacity-0 md:group-hover:opacity-100"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <svg
+              (click)="deleteUploadImage(i)"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="absolute top-1 right-1 z-10 h-5 w-5 cursor-pointer rounded-full bg-white/80 py-0.5 px-0.5 text-red-500 backdrop-blur transition-all duration-300 hover:bg-white hover:text-red-400 md:opacity-0 md:group-hover:opacity-100"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <img
+              ixImg
+              [path]="img"
+              loading="eager"
+              class="object-cover object-center mr-2 rounded-md aspect-video w-28"
+              alt=""
+            />
+          </div>
+        </li>
+        <li *ngFor="let file of fileDropper.value; let i = index">
+          <div
+            [ngClass]="{
+              'ring-2 md:scale-100': file.isCover,
+              'ring-0 md:scale-95': !file.isCover
+            }"
+            class="relative transition-all duration-300 rounded-md shadow-lg group w-28 ring-0 ring-indigo-500 md:scale-95 md:hover:scale-100"
+          >
+            <svg
+              *ngIf="!file.isCover"
+              (click)="setUploadCoverImage(i)"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="absolute top-1 left-1 z-10 h-5 w-5 cursor-pointer rounded-full bg-white/80 py-1 px-0.5 text-indigo-500 backdrop-blur transition-all duration-300 hover:bg-white hover:text-indigo-400 md:opacity-0 md:group-hover:opacity-100"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <svg
+              (click)="deleteGalleryImage(i)"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="absolute top-1 right-1 z-10 h-5 w-5 cursor-pointer rounded-full bg-white/80 py-0.5 px-0.5 text-red-500 backdrop-blur transition-all duration-300 hover:bg-white hover:text-red-400 md:opacity-0 md:group-hover:opacity-100"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <img
+              [src]="file.url"
+              class="object-cover object-center mr-2 rounded-md aspect-video w-28"
+              alt=""
+            />
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="flex flex-col w-full gap-4 mt-10 md:ml-auto md:w-max md:flex-row">
+    <button
+      [disabled]="isEqualCourse && form.value.hide"
+      (click)="submitForm('draft')"
+      class="w-full px-4 py-2 font-semibold transition-all duration-300 border-2 rounded-md cursor-pointer border-amber-500 bg-amber-500/0 text-zinc-300 ring-amber-300 ring-offset-1 ring-offset-zinc-900 hover:border-transparent hover:bg-amber-400/20 hover:ring-2 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-amber-500 disabled:hover:bg-amber-500/0 disabled:hover:ring-0 md:w-max"
+    >
+      Salva come bozza
+    </button>
+    <button
+      [disabled]="isEqualCourse && !form.value.hide"
+      (click)="submitForm('publish')"
+      class="w-full px-4 py-2 font-semibold transition-all duration-300 bg-teal-500 border-2 border-teal-500 rounded-md cursor-pointer text-zinc-900 ring-teal-300 ring-offset-1 ring-offset-zinc-900 hover:border-teal-400 hover:bg-teal-400 hover:ring-2 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-teal-400 disabled:hover:bg-teal-500 disabled:hover:ring-0 md:w-max"
+    >
+      Salva e pubblica il corso
+    </button>
+  </div>
+</form>

@@ -1,0 +1,25 @@
+:host {
+  @apply block w-full;
+
+  input:not(.transparent), textarea, select {
+    @apply bg-zinc-800 rounded-md py-2 shadow-lg text-zinc-100 border-zinc-600 placeholder-zinc-500 ring-0 focus:ring-2 focus:outline-none focus:ring-indigo-500 transition-all duration-300;
+  
+    @apply invalid:border-red-400 invalid:focus:ring-red-400;
+  }
+
+  input, textarea {
+    @apply w-full;
+
+    &:not(.transparent) {
+      @apply px-4;
+    }
+  }
+
+  input.transparent {
+    @apply bg-transparent py-2 border-0 border-b border-zinc-800 focus:border-b-zinc-600 hover:border-zinc-600 text-zinc-100 focus:ring-0 outline-none active:outline-none focus:outline-none focus:border-transparent transition-all duration-300;
+  }
+  
+  label:not(.no-style) {
+    @apply mb-2 text-sm text-zinc-500 block;
+  }
+}
