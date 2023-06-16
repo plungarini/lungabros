@@ -67,13 +67,13 @@ export const updateRoutes = async () => {
 };
 
 const defaultRoutes = [
-	{ url: 'https://lungabros.it/', priority: 0 },
-	{ url: 'https://lungabros.it/contact', priority: 0 },
-	{ url: 'https://lungabros.it/articles/importanza-della-sicurezza', priority: 0 },
-	{ url: 'https://lungabros.it/articles/torchbearers', priority: 0 },
-	{ url: 'https://lungabros.it/about', priority: 0 },
-	{ url: 'https://lungabros.it/about/pietro-lungarini', priority: 0 },
-	{ url: 'https://lungabros.it/about/samuele-lungarini', priority: 0 },
+	{ url: 'https://lungabros.it/', priority: 1 },
+	{ url: 'https://lungabros.it/contact', priority: 0.6 },
+	{ url: 'https://lungabros.it/articles/importanza-della-sicurezza', priority: 0.6 },
+	{ url: 'https://lungabros.it/articles/torchbearers', priority: 0.6 },
+	{ url: 'https://lungabros.it/about', priority: 0.7 },
+	{ url: 'https://lungabros.it/about/pietro-lungarini', priority: 0.9 },
+	{ url: 'https://lungabros.it/about/samuele-lungarini', priority: 0.9 },
 ];
 
 const updateSitemap = async (coursesRoutes: Array<string>) => {
@@ -82,7 +82,7 @@ const updateSitemap = async (coursesRoutes: Array<string>) => {
 	const newSitemapRoutes = [
 		...defaultRoutes,
 		...coursesRoutes
-			.map((r) => ({ url: `https://lungabros.it/${r}`, priority: 0.7 }))
+			.map((r) => ({ url: `https://lungabros.it/${r}`, priority: 0.8 }))
 	];
 
 	let sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
