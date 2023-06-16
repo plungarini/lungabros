@@ -2,132 +2,132 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>https://lungabros.it/</loc>
-		<priority>0</priority>
+		<priority>1</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it/contact</loc>
-		<priority>0</priority>
+		<priority>0.6</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it/articles/importanza-della-sicurezza</loc>
-		<priority>0</priority>
+		<priority>0.6</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it/articles/torchbearers</loc>
-		<priority>0</priority>
+		<priority>0.6</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it/about</loc>
-		<priority>0</priority>
+		<priority>0.7</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it/about/pietro-lungarini</loc>
-		<priority>0</priority>
+		<priority>0.9</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it/about/samuele-lungarini</loc>
-		<priority>0</priority>
+		<priority>0.9</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/advanced-open-water</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/boat</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/deep</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/discover-scuba</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/divemaster</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/dpv</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/drift</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/dry-suit</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/efr</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/eop</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/equipment-specialist</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/night</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/nitrox</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/open-water</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/ppb</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/rescue</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/search-recovery</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/underwater-navigator</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 		<loc>https://lungabros.it//courses/info/wreck</loc>
-		<priority>0.7</priority>
+		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
 	</url>
 </urlset>
