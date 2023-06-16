@@ -1,29 +1,30 @@
-import { Injectable } from '@angular/core';
-import { Functions, httpsCallable } from '@angular/fire/functions';
+import { Injectable, inject } from '@angular/core';
+import { Functions, httpsCallableFromURL } from '@angular/fire/functions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SendEmailService {
 
-	constructor(
-		private functions: Functions
-	) { }
+	private functions = inject(Functions);
+
+	constructor() { }
 	
-	async send(form: {
+	send(form: {
 		firstName: string;
 		lastName: string;
 		email: string;
 		phone?: string;
 		message: string;
 	}): Promise<any> {
-		const fn = httpsCallable<{
+		const fnUrl = 'https://emailcontactform-pr6c6pbisa-nw.a.run.app';
+		const fn = httpsCallableFromURL<{
 			firstName: string;
 			lastName: string;
 			email: string;
 			phone?: string;
 			message: string;
-		}>(this.functions, 'emailContactForm');
+		}>(this.functions, fnUrl, { timeout: 60 * 1000 })
 		return fn(form);
 	}
 }
