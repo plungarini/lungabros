@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { Observable, Subscription, map } from 'rxjs';
+import { UsersService } from 'src/app/auth/services/users.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,7 @@ import { Subscription } from 'rxjs';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent {
   menuOpen = false;
   menuAnimationOpen = false;
 
@@ -25,26 +26,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ];
 
   userSub: Subscription | undefined;
-  isUserAdmin = false;
+	isUserAdmin$: Observable<boolean>;
 
   constructor(
 		private cdRef: ChangeDetectorRef,
-		// TODO
-    /* private userService: UsersService, */
-  ) { }
-
-	ngOnInit(): void {
-		// TODO
-    /* this.userSub = this.userService.getCurrentUserDb()
-      .subscribe(u => {
-        this.isUserAdmin = u?.roles?.admin || false;
-        this.cdRef.detectChanges();
-      }); */
-  }
-
-  ngOnDestroy(): void {
-    this.userSub?.unsubscribe();
-  }
+    private userService: UsersService,
+	) {
+		this.isUserAdmin$ = this.userService.getCurrentUserDb().pipe(
+			map((u) => { console.log(u); return u; }),
+			map((u) => u?.roles?.admin || false)
+		)
+	}
 
   toggleMenu(state?: boolean): void {
     this.menuOpen = state !== undefined ? state : !this.menuOpen;
