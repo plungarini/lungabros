@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from './shared/guards/admin.guard';
+import { AuthGuard } from './shared/guards/auth.guard';
+import { CustomPreloadingStrategyService } from './shared/services/custom-preloading-strategy.service';
 
 const routes: Routes = [
 	{
@@ -30,6 +33,12 @@ const routes: Routes = [
     path: 'articles',
     loadChildren: () =>
       import('./pages/articles/articles.module').then((m) => m.ArticlesModule),
+	},
+	{
+    path: 'admin',
+    canActivate: [AuthGuard, AdminGuard],
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
   },
 	{
     path: 'auth',
@@ -50,8 +59,11 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabledBlocking'
-})],
+		initialNavigation: 'enabledBlocking',
+		anchorScrolling: 'enabled',
+		scrollPositionRestoration: 'enabled',
+		preloadingStrategy: CustomPreloadingStrategyService,
+	})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

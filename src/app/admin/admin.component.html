@@ -1,0 +1,14 @@
+<app-header align="object-top"></app-header>
+
+<div class="px-4">
+	<div class="relative z-30 px-4 mx-4 overflow-visible shadow-2xl sm:mx-auto max-w-7xl sm:px-6 lg:px-8 xl:px-12 rounded-xl bg-zinc-900 -mt-44">
+		<div class="flex flex-col gap-6 py-8 divide-y-2 md:flex-row md:divide-y-0 md:divide-x-2 divide-zinc-800">
+			<div class="flex-1 max-w-max">
+				<app-navbar [tasksCount]="tasksCount"></app-navbar>
+			</div>
+			<div class="flex-1 px-4 pt-6 md:pt-0">
+				<router-outlet></router-outlet>
+			</div>
+		</div>
+	</div>
+</div>
