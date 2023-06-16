@@ -20,7 +20,9 @@ import { CourseFilters } from 'src/app/pages/courses/models/course-filters.model
 export class FiltersComponent implements OnInit, OnDestroy {
 
   @Output() filters = new EventEmitter<CourseFilters>();
-  @Output() clear = new EventEmitter();
+	@Output() clear = new EventEmitter();
+	
+	@Input() id: 'mobile' | 'desktop' = 'desktop';
 
   form = new FormGroup({
     kids: new FormControl(false),
@@ -31,28 +33,28 @@ export class FiltersComponent implements OnInit, OnDestroy {
     experience: new FormControl(false),
     dry: new FormControl(false),
   });
-  formSub: Subscription | undefined;
-
+	formSub: Subscription | undefined;
+	
+	
   constructor() { }
 
   ngOnInit(): void {
     this.formSub = this.form.valueChanges.subscribe((value) => {
-      const normBool = (value: any) => typeof value === 'boolean' ? value : false;
-      this.filters.emit({
-        category: [
-          { name: 'kids', enabled: normBool(this.form.value.kids) },
-          { name: 'junior', enabled: normBool(this.form.value.junior) },
-          { name: 'main', enabled: normBool(this.form.value.main) },
-          { name: 'specialty', enabled: normBool(this.form.value.specialty) },
-          { name: 'withDives', enabled: normBool(this.form.value.withDives) },
-          { name: 'experience', enabled: normBool(this.form.value.experience) },
-          { name: 'dry', enabled: normBool(this.form.value.dry) },
-        ]
-      });
+			const normBool = (value: any) => typeof value === 'boolean' ? value : false;
+			const filtersValue = [
+				{ name: 'kids', enabled: normBool(this.form.value.kids) },
+				{ name: 'junior', enabled: normBool(this.form.value.junior) },
+				{ name: 'main', enabled: normBool(this.form.value.main) },
+				{ name: 'specialty', enabled: normBool(this.form.value.specialty) },
+				{ name: 'withDives', enabled: normBool(this.form.value.withDives) },
+				{ name: 'experience', enabled: normBool(this.form.value.experience) },
+				{ name: 'dry', enabled: normBool(this.form.value.dry) },
+			];
+      this.filters.emit({ category: filtersValue });
     });
   }
 
-  clearFilters(): void {
+	clearFilters(): void {
     this.clear.emit();
     this.form.reset();
   }

@@ -1,12 +1,12 @@
-<div class="hidden sm:block relative w-full h-full mt-24 sm:mt-32 group">
-  <div class="w-full h-full scale-95 group-hover:scale-100 xl:scale-105 xl:group-hover:scale-110 2xl:scale-125 2xl:group-hover:scale-125 shadow-2xl rounded-xl -rotate-1 border-4 border-amber-500 overflow-hidden transition-all duration-300">
-    <img ixImg #ix loading="lazy" [path]="img" class="absolute top-0 left-0 w-full h-full object-cover object-center z-10" alt="">
-    <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-indigo-800 to-indigo-800/80 backdrop-blur z-20"></div>
+<div class="relative hidden w-full h-full mt-24 sm:block sm:mt-32 group">
+  <div class="w-full h-full overflow-hidden transition-all duration-300 scale-95 border-4 shadow-2xl group-hover:scale-100 xl:scale-105 xl:group-hover:scale-110 2xl:scale-125 2xl:group-hover:scale-125 rounded-xl -rotate-1 border-amber-500">
+    <img ixImg #ix loading="lazy" [path]="img" class="absolute top-0 left-0 z-10 object-cover object-center w-full h-full" alt="">
+    <div class="absolute top-0 left-0 z-20 w-full h-full bg-gradient-to-t from-indigo-800 to-indigo-800/80 backdrop-blur"></div>
     
-    <div class="relative w-full h-full px-6 py-16 max-w-4xl z-40 mx-auto">
+    <div class="relative z-40 w-full h-full max-w-4xl px-6 py-16 mx-auto">
       <h1>Come ottenere la tua certificazione</h1>
       <p class="text-zinc-200" [innerText]="text"></p>
-      <p class="text-zinc-200">Ci sono due modi per ottenere la tua certificazione:</p>
+      <p class="text-zinc-200">Ci sono solo due step per ottenere la tua certificazione:</p>
     </div>
   </div>
 </div>
@@ -14,5 +14,5 @@
 <div class="block sm:hidden">
   <h3 class="text-3xl">Come ottenere la tua certificazione</h3>
   <p class="text-zinc-200" [innerText]="text"></p>
-  <p class="text-zinc-200">Ci sono due modi per ottenere la tua certificazione:</p>
+  <p class="text-zinc-200">Ci sono solo due step per ottenere la tua certificazione:</p>
 </div>
