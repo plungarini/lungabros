@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 interface CourseHeader {
   title: string;
   subtitle?: string;
-  bgImg: string;
+	bgImg: string;
+	description?: string;
 }
 
 @Injectable({
@@ -18,8 +19,8 @@ export class HeaderService {
 
   constructor() { }
 
-  setHeader(title: string, bgImg: string, subtitle?: string): void {
-    this.$header.next({ title, bgImg, subtitle });
+  setHeader(opt: CourseHeader): void {
+    this.$header.next(opt);
     return;
   }
 }

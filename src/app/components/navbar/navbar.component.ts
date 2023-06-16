@@ -33,7 +33,6 @@ export class NavbarComponent {
     private userService: UsersService,
 	) {
 		this.isUserAdmin$ = this.userService.getCurrentUserDb().pipe(
-			map((u) => { console.log(u); return u; }),
 			map((u) => u?.roles?.admin || false)
 		)
 	}

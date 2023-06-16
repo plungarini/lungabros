@@ -163,6 +163,6 @@ export class AuthService {
 			this.router.navigate([returnUrl]);
 			localStorage.removeItem('returnUrl');
 		} else
-			this.router.navigate(['/admin']); // TODO Set custom redirect after login.
+			this.router.navigate(['/admin']);
 	}
 }
