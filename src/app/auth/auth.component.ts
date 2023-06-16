@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { Subscription, filter } from 'rxjs';
+import { PageLoaderService } from '../shared/services/page-loader.service';
 
 @Component({
   selector: 'app-auth',
@@ -15,10 +16,12 @@ export class AuthComponent implements OnInit, OnDestroy {
   constructor(
     private pageTitle: Title,
     private router: Router,
-    private route: ActivatedRoute,
+		private route: ActivatedRoute,
+		private pageLoader: PageLoaderService,
   ) { }
 
-  ngOnInit(): void {
+	ngOnInit(): void {
+		this.pageLoader.show(false);
     this.pageTitle.setTitle(`LUNGABROS | Login`);
     this.routerSub = this.router.events
       .pipe(
