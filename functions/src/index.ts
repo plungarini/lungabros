@@ -42,7 +42,7 @@ export const emailContactForm = onCall<{
 	email: string;
 	phone?: string;
 	message: string;
-}, void>({ region: 'europe-west2', cors: false }, async ({ data }) => {
+}, Promise<boolean>>({ region: 'europe-west2', cors: true }, async ({ data }) => {
 
 	const email = process.env.EMAIL_USER;
 	const pssw = process.env.EMAIL_PSSW;
@@ -75,6 +75,7 @@ export const emailContactForm = onCall<{
 			});
 		});
 		warn('Email sent: ' + sendEmail.response);
+		return true;
 	} catch (err) {
 		error(err);
 		throw err;
