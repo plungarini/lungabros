@@ -36,7 +36,8 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   searchBar = new FormControl('');
   courseLoaded = false;
   filtersPopupOpen = false;
-  page = 1;
+	page = 1;
+	isFiltering = false
 
   constructor(
     private db: FirebaseExtendedService,
@@ -45,7 +46,11 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.headerService.setHeader(this.title, this.imgPath, this.subtitle);
+		this.headerService.setHeader({
+			title: this.title,
+			bgImg: this.imgPath,
+			subtitle: this.subtitle
+		});
     this.cdRef.detectChanges();
 
     this.courseSub = this.db.getCol<Course>('courses').subscribe((courses) => {
@@ -57,13 +62,6 @@ export class CoursesListComponent implements OnInit, OnDestroy {
     this.searchSub = this.searchBar.valueChanges.subscribe((value) => {
       this.filterSearch(value || '');
     });
-
-    /* this.mediaSub = this.media('(max-width: 768px)').subscribe((matches) => {
-      this.itemsPerPage = matches ? 500 : 9;
-      this.isMobile = matches;
-      this.mobileCourseCount = matches ? 4 : this.mobileCourseCount;
-      this.cdRef.detectChanges();
-    }); */
   }
 
   ngOnDestroy(): void {
@@ -109,14 +107,17 @@ export class CoursesListComponent implements OnInit, OnDestroy {
     this.filterSidebar();
   }
 
-  filterSidebar(filters?: CourseFilters): void {
+	filterSidebar(filters?: CourseFilters): void {
+		this.isFiltering = true;
+		this.cdRef.detectChanges();
+
     this.filteredCourses = this.courseList;
     if (!filters) {
       this.filtersPopupOpen = false;
       this.mobileCourseCount = 4;
       this.cdRef.detectChanges();
       return;
-    }
+		}
     this.filters = filters;
     filters.category.forEach((f) => {
       if (f.enabled) {
@@ -128,8 +129,13 @@ export class CoursesListComponent implements OnInit, OnDestroy {
       }
     });
     this.filtersPopupOpen = false;
-    this.mobileCourseCount = 4;
-    this.cdRef.detectChanges();
+		this.mobileCourseCount = 4;
+		
+		this.cdRef.detectChanges();
+		setTimeout(() => {
+			this.isFiltering = false;
+			this.cdRef.detectChanges();
+		}, 1000);
   }
 
   changePage(page: number, el: HTMLElement) {
@@ -145,7 +151,10 @@ export class CoursesListComponent implements OnInit, OnDestroy {
     return Array(9);
   }
 
-  private filterSearch(value: string): void {
+	private filterSearch(value: string): void {
+		this.isFiltering = true;
+		this.cdRef.detectChanges();
+
     const normValue = value ? value.toLowerCase().trim() : '';
     this.filterSidebar(this.filters);
     this.filteredCourses = this.filteredCourses.filter(
@@ -154,6 +163,11 @@ export class CoursesListComponent implements OnInit, OnDestroy {
         c.title.toLowerCase().replace('padi®', '').includes(normValue)
     );
     this.mobileCourseCount = 4;
-    this.cdRef.detectChanges();
+		
+		this.cdRef.detectChanges();
+		setTimeout(() => {
+			this.isFiltering = false;
+			this.cdRef.detectChanges();
+		}, 1000);
   }
 }
