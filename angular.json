@@ -28,7 +28,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              "src/sitemap.xml"
             ],
             "styles": [
               "src/styles.scss"
@@ -57,7 +58,7 @@
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumError": "10kb"
                 }
               ],
               "outputHashing": "all"
@@ -169,7 +170,6 @@
               "/",
               "auth/login",
               "contact",
-							"articles",
 							"articles/importanza-della-sicurezza",
 							"articles/torchbearers",
 							"about",
