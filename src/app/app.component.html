@@ -1,5 +1,5 @@
 <div class="relative z-0">
-  <app-navbar *ngIf="!isAdminArea"></app-navbar>
+  <app-navbar *ngIf="(showNavBar$ | async)"></app-navbar>
 
   <div class="relative pb-16 sm:pb-24">
     <main class="relative w-full bg-zinc-900">
@@ -7,7 +7,7 @@
     </main>
   </div>
 
-  <app-footer *ngIf="!isAdminArea"></app-footer>
+  <app-footer *ngIf="(showNavBar$ | async)"></app-footer>
 </div>
 <div
 	*ngIf="($loader | async) as showLoader; else undefinedLoader"
