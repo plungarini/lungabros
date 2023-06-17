@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, Observable, fromEvent, startWith, map } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -30,23 +30,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.mediaSub = this.media('(max-width: 768px)').subscribe((matches) => {
-      this.isMobile = matches;
-      this.cdRef.detectChanges();
-    });
   }
 
   ngOnDestroy(): void {
-    this.mediaSub?.unsubscribe();
   }
 
-  media(query: string): Observable<boolean> {
-    const mediaQuery = window.matchMedia(query);
-    return fromEvent<MediaQueryList>(mediaQuery, 'change').pipe(
-      startWith(mediaQuery),
-      map((list: MediaQueryList) => list.matches)
-    );
-  }
+
 
   getCount(path: string): number {
     switch (path) {

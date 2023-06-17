@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnIni
 import { Timestamp } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { jsPDF } from 'jspdf';
-import { Subscription, map, of, switchMap } from 'rxjs';
+import { Subscription, map, of, switchMap, take } from 'rxjs';
 import { FirebaseExtendedService } from 'src/app/shared/services/firebase-extended.service';
 import { PageLoaderService } from 'src/app/shared/services/page-loader.service';
 import { PdfComponent } from './components/pdf/pdf.component';
@@ -58,7 +58,8 @@ export class CurriculumComponent implements OnInit, OnDestroy {
                 normCv = {...normCv, desc: normCv.desc.replace('{age}', this.normAge(normCv.birthday.toDate()) + '')};
                 const res: Curriculum = { ...normCv, certs: normCerts };
                 return res;
-              })
+							}),
+							take(1),
             );
         }),
       ).subscribe(dbCurriculum => {
@@ -96,7 +97,7 @@ export class CurriculumComponent implements OnInit, OnDestroy {
     pdfContent.visible = false;
     pdfContent.setCurriculum = this.curriculum;    
     
-    const sub = pdfContent.loaded.subscribe(() => {
+    const sub = pdfContent.loaded.pipe(take(1)).subscribe(() => {
       const cvEl = pdfContent.cvElement?.nativeElement;
       const setFamily = (element: HTMLElement) => {
         const len = element.children.length || 0;

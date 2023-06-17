@@ -122,7 +122,8 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
     });
 
     this.dbConnection = this.db
-      .getCol<Course>('courses')
+			.getCol<Course>('courses')
+			.pipe(take(1))
       .subscribe((courses) => {
         this.allCourses = courses.map((c) => ({ id: c.id, title: c.title }));
         this.filteredCourses = this.allCourses;

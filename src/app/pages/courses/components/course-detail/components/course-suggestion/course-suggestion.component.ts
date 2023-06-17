@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { FirebaseExtendedService } from 'src/app/shared/services/firebase-extended.service';
 import { Course } from '../../../../../../shared/models/course.model';
 
@@ -31,7 +31,7 @@ export class CourseSuggestionComponent implements OnInit, OnDestroy {
 
     if (!value.suggestedCourse || value.suggestedCourse.length <= 0) return;
     value.suggestedCourse.forEach(suggestion => {
-      const sub = this.db.getDoc<Course>(`courses/${suggestion}`).subscribe(course => {
+      const sub = this.db.getDoc<Course>(`courses/${suggestion}`).pipe(take(1)).subscribe(course => {
         if (!course) return;
         const obj = {
           id: course.id,

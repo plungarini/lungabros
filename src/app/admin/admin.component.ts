@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { Subscription, filter } from 'rxjs';
+import { Subscription, filter, take } from 'rxjs';
 import { PersonalMetaTagsService } from '../shared/services/personal-meta-tags.service';
 import { TodoService } from './pages/todo/services/todo.service';
 
@@ -39,7 +39,8 @@ export class AdminComponent implements OnInit, OnDestroy {
       });
 
     this.dbConnection = this.tasksService
-      .getUnreadedTasksCount()
+			.getUnreadedTasksCount()
+			.pipe(take(1))
       .subscribe((tasksCount) => {
         this.tasksCount = tasksCount;
         this.cdRef.detectChanges();

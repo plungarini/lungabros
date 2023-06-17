@@ -1,11 +1,11 @@
 import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    OnDestroy,
-    OnInit,
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	OnDestroy,
+	OnInit,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { Course } from 'src/app/shared/models/course.model';
 import { FirebaseExtendedService } from 'src/app/shared/services/firebase-extended.service';
 
@@ -34,7 +34,7 @@ export class SectionTwoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     ['open-water', 'advanced-open-water', 'rescue', 'divemaster'].forEach(
       (id, i) => {
-        const sub = this.db.getDoc<Course>(`courses/${id}`).subscribe((c) => {
+        const sub = this.db.getDoc<Course>(`courses/${id}`).pipe(take(1)).subscribe((c) => {
           if (!c) return;
           this.courses[i] = c;
           this.cdRef.detectChanges();

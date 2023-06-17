@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit } from '@angula
 import { Timestamp } from '@angular/fire/firestore';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { Course } from 'src/app/shared/models/course.model';
 import { FirebaseExtendedService } from 'src/app/shared/services/firebase-extended.service';
 import { PageLoaderService } from 'src/app/shared/services/page-loader.service';
@@ -32,7 +32,8 @@ export class CoursesComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.pageLoader.show(false);
     this.dbConnection = this.db
-      .getCol<Course>('courses')
+			.getCol<Course>('courses')
+			.pipe(take(1))
       .subscribe((courses) => {
         this.courses = this.sortCourses(courses);
         this.filteredCourses = this.courses;

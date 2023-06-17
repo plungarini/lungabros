@@ -6,7 +6,7 @@ import {
 	OnInit,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { FirebaseExtendedService } from 'src/app/shared/services/firebase-extended.service';
 import { Course } from '../../../../shared/models/course.model';
 import { CourseFilters } from '../../models/course-filters.model';
@@ -53,7 +53,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
 		});
     this.cdRef.detectChanges();
 
-    this.courseSub = this.db.getCol<Course>('courses').subscribe((courses) => {
+    this.courseSub = this.db.getCol<Course>('courses').pipe(take(1)).subscribe((courses) => {
       this.courseLoaded = true;
       this.courseList = this.sortCourses(courses.filter((c) => !c.hide));
       this.filterSidebar(this.filters);

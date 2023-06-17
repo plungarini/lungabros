@@ -8,7 +8,7 @@ import {
 	QueryList,
 	ViewChildren,
 } from '@angular/core';
-import { Subscription, switchMap } from 'rxjs';
+import { Subscription, switchMap, take } from 'rxjs';
 import { UsersService } from 'src/app/auth/services/users.service';
 import { FirebaseExtendedService } from 'src/app/shared/services/firebase-extended.service';
 import { PageLoaderService } from 'src/app/shared/services/page-loader.service';
@@ -51,7 +51,8 @@ export class TodoComponent implements OnInit, OnDestroy {
         switchMap((user) => {
           this.userId = user?.id || '';
           return this.db.getCol<TodoTask>('tasks');
-        })
+				}),
+				take(1),
       )
       .subscribe((t) => {
         this.tasks = t;

@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { PageLoaderService } from 'src/app/shared/services/page-loader.service';
 import { Course } from '../../../../shared/models/course.model';
 import { HeaderService } from '../../services/header.service';
@@ -22,7 +22,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.courseSub = this.route.data.subscribe(({ course }) => {
+    this.courseSub = this.route.data.pipe(take(1)).subscribe(({ course }) => {
 			if (!course) return;
       this.course = this.normCourse(course);
 			this.headerService.setHeader({

@@ -14,6 +14,7 @@ import {
 import { doc, getDoc, getFirestore } from '@angular/fire/firestore';
 import { getFunctions, httpsCallable } from '@angular/fire/functions';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
 import { User as DbUser } from '../models/user.model';
 import { FirebaseErrorHandling } from '../namespaces/error-auth';
 import { UsersService } from './users.service';
@@ -134,7 +135,7 @@ export class AuthService {
 			if (!this.ADMIN_EMAILS.includes((credential.user.email || '').toLowerCase())) {
 				this.router.navigateByUrl('/');
 				localStorage.clear();
-				const userSub = user(getAuth()).subscribe((u) => {
+				const userSub = user(getAuth()).pipe(take(1)).subscribe((u) => {
 					if (u) deleteUser(u);
 					userSub.unsubscribe();
 				});
