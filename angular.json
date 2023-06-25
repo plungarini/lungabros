@@ -28,15 +28,12 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest",
               "src/sitemap.xml"
             ],
             "styles": [
               "src/styles.scss"
             ],
             "scripts": [],
-            "serviceWorker": true,
-            "ngswConfigPath": "ngsw-config.json",
             "allowedCommonJsDependencies": [
               "imgix-core-js",
 							"lodash",
@@ -110,6 +107,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/manifest.webmanifest",
               "src/manifest.webmanifest"
             ],
             "styles": [
@@ -170,13 +168,15 @@
     				"serverTarget": "lungabros:server:production",
             "routes": [
               "/",
+							"login",
               "auth/login",
               "contact",
 							"articles/importanza-della-sicurezza",
 							"articles/torchbearers",
 							"about",
 							"about/pietro-lungarini",
-							"about/samuele-lungarini"
+							"about/samuele-lungarini",
+							"courses"
             ]
           },
           "configurations": {

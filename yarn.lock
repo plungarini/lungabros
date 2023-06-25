@@ -249,13 +249,6 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/service-worker@^16.1.0":
-  version "16.1.1"
-  resolved "https://registry.npmjs.org/@angular/service-worker/-/service-worker-16.1.1.tgz"
-  integrity sha512-kTFqY38toiN2K6zJbw4mwd+7wjcL02MdWcvX9GD6olIrbU71dV2FjwfDVWYt4SGyRGok3Uuo0iCHxmWemotUaw==
-  dependencies:
-    tslib "^2.3.0"
-
 "@assemblyscript/loader@^0.10.1":
   version "0.10.1"
   resolved "https://registry.npmjs.org/@assemblyscript/loader/-/loader-0.10.1.tgz"
@@ -4129,7 +4122,7 @@ find-up@^4.0.0, find-up@^4.1.0:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
 
-firebase@^9.8.0:
+firebase@^9.22.2, firebase@^9.8.0:
   version "9.22.2"
   resolved "https://registry.npmjs.org/firebase/-/firebase-9.22.2.tgz"
   integrity sha512-eBXsaTzXPx3Y0QhuuluG/qR58tlOx2X/W0GKNoF004FcG9L2gHuvGu5/bIczvrPyfNOCqDF+I5I/kOQi8l9m0A==
