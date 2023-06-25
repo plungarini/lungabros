@@ -52,7 +52,7 @@
                   class="block py-2"
                 >{{ item.name }}</a>
               </li>
-              <li *ngIf="isUserAdmin$">
+              <li *ngIf="isUserAdmin$ | async">
                 <a
                   routerLink="/admin"
                   (click)="toggleMenu(false)"
