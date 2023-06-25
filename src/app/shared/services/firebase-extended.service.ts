@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
 import {
-	collection,
 	CollectionReference,
+	DocumentReference,
+	Query,
+	QueryConstraint,
+	collection,
+	collectionData,
 	deleteDoc,
 	doc,
 	docData,
-	DocumentReference,
 	getDoc,
 	getFirestore,
-	Query,
 	query,
-	QueryConstraint,
 	setDoc,
 	updateDoc,
 } from '@angular/fire/firestore';
-import { collectionData } from 'rxfire/firestore';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
