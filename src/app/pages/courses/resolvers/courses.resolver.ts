@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {
-    ActivatedRouteSnapshot,
-    Resolve,
-    RouterStateSnapshot
+	ActivatedRouteSnapshot,
+	Resolve,
+	RouterStateSnapshot
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { FirebaseExtendedService } from 'src/app/shared/services/firebase-extended.service';
 import { Course } from '../../../shared/models/course.model';
 
@@ -20,7 +20,7 @@ export class CoursesResolver implements Resolve<Course | undefined> {
     state: RouterStateSnapshot
   ): Observable<Course | undefined> {
     const id = route.paramMap.get('id');
-    const course = this.db.getDoc<Course>(`courses/${id}`)
+    const course = this.db.getDoc<Course>(`courses/${id}`).pipe(take(1))
     return course;
   }
 }
