@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { user } from '@angular/fire/auth';
 import { getAuth, User } from '@firebase/auth';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, of, switchMap, take } from 'rxjs';
 import { FirebaseExtendedService } from 'src/app/shared/services/firebase-extended.service';
 import { User as DbUser } from '../models/user.model';
 
@@ -65,7 +65,7 @@ export class UsersService {
    * @returns an Observable with a list of Users.
    */
   getAll(query?: any): Observable<DbUser[]> {
-    return this.db.getCol<DbUser>('users', query);
+    return this.db.getCol<DbUser>('users', query).pipe(take(1));
   }
 
   /**
@@ -75,7 +75,7 @@ export class UsersService {
    */
   get(id?: string): Observable<DbUser | undefined> {
     if (!id) return of(undefined);
-    return this.db.getDoc<DbUser>(`users/${id}`);
+    return this.db.getDoc<DbUser>(`users/${id}`).pipe(take(1));
   }
 
   /**

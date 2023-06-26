@@ -6,7 +6,7 @@ import {
 	OnDestroy,
 	OnInit,
 	QueryList,
-	ViewChildren,
+	ViewChildren
 } from '@angular/core';
 import { Subscription, switchMap, take } from 'rxjs';
 import { UsersService } from 'src/app/auth/services/users.service';
@@ -47,12 +47,12 @@ export class TodoComponent implements OnInit, OnDestroy {
 		this.pageLoader.show(false);
     this.dbConnection = this.usersService
       .getCurrentUserDb()
-      .pipe(
+			.pipe(
+				take(1),
         switchMap((user) => {
           this.userId = user?.id || '';
-          return this.db.getCol<TodoTask>('tasks');
+          return this.db.getCol<TodoTask>('tasks').pipe(take(1));
 				}),
-				take(1),
       )
       .subscribe((t) => {
         this.tasks = t;

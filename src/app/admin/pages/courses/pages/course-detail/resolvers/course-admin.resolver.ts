@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {
-    ActivatedRouteSnapshot,
-    Resolve,
-    RouterStateSnapshot
+	ActivatedRouteSnapshot,
+	Resolve,
+	RouterStateSnapshot
 } from '@angular/router';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, of, switchMap, take } from 'rxjs';
 import { Course } from 'src/app/shared/models/course.model';
 import { FirebaseExtendedService } from 'src/app/shared/services/firebase-extended.service';
 
@@ -21,13 +21,14 @@ export class CourseAdminResolver implements Resolve<Partial<Course> | Course | u
     const id = route.paramMap.get('id');
     const course = this.db
       .getDoc<Partial<Course>>(`draft-courses/${id}`)
-      .pipe(
+			.pipe(
+				take(1),
         switchMap((draft) => {
           const normDraft: Partial<Course> = { ...draft, hide: true };          
           return draft
             ? of(normDraft)
-            : this.db.getDoc<Course>(`courses/${id}`)
-        })
+            : this.db.getDoc<Course>(`courses/${id}`).pipe(take(1))
+				}),
       );
     return course;
   }

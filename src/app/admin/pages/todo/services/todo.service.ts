@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { where } from '@firebase/firestore';
-import { map, Observable, of, switchMap } from 'rxjs';
+import { map, Observable, of, switchMap, take } from 'rxjs';
 import { UsersService } from 'src/app/auth/services/users.service';
 import { FirebaseExtendedService } from 'src/app/shared/services/firebase-extended.service';
 import { TodoTask } from '../models/todo.model';
@@ -15,7 +15,8 @@ export class TodoService {
   ) {}
 
   getUnreadedTasksCount(): Observable<number> {
-    return this.usersService.getCurrentFire().pipe(
+		return this.usersService.getCurrentFire().pipe(
+			take(1),
       switchMap((user) => {
         if (!user) return of(0);
         return this.db
@@ -24,7 +25,10 @@ export class TodoService {
             'id',
             where('readBy', 'not-in', [[user.uid]])
           )
-          .pipe(map((t) => t.length));
+					.pipe(
+						take(1),
+						map((t) => t.length),
+					);
       })
     );
   }

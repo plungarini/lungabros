@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
-import { Observable, Subscription, map } from 'rxjs';
+import { map, Observable, Subscription, take } from 'rxjs';
 import { UsersService } from 'src/app/auth/services/users.service';
 
 @Component({
@@ -33,6 +33,7 @@ export class NavbarComponent {
     private userService: UsersService,
 	) {
 		this.isUserAdmin$ = this.userService.getCurrentUserDb().pipe(
+			take(1),
 			map((u) => u?.roles?.admin || false)
 		)
 	}

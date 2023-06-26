@@ -26,7 +26,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
+              "src/lungabros.ico",
               "src/assets",
               "src/sitemap.xml"
             ],
@@ -95,27 +95,6 @@
             "browserTarget": "lungabros:build"
           }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/manifest.webmanifest",
-              "src/manifest.webmanifest"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": []
-          }
-        },
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
@@ -168,15 +147,13 @@
     				"serverTarget": "lungabros:server:production",
             "routes": [
               "/",
-							"login",
               "auth/login",
               "contact",
 							"articles/importanza-della-sicurezza",
 							"articles/torchbearers",
 							"about",
 							"about/pietro-lungarini",
-							"about/samuele-lungarini",
-							"courses"
+							"about/samuele-lungarini"
             ]
           },
           "configurations": {
@@ -195,9 +172,9 @@
           "builder": "@angular/fire:deploy",
           "options": {
             "version": 2,
-            "browserTarget": "lungabros:build:production",
-            "serverTarget": "lungabros:server:production",
-            "prerenderTarget": "lungabros:prerender:production"
+						"browserTarget": "lungabros:build:production",
+						"serverTarget": "lungabros:server:production",
+						"prerenderTarget": "lungabros:prerender:production"
           }
         }
       }

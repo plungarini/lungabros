@@ -2,9 +2,10 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnIni
 import { Timestamp } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { jsPDF } from 'jspdf';
-import { Subscription, map, of, switchMap, take } from 'rxjs';
+import { map, of, Subscription, switchMap, take } from 'rxjs';
 import { FirebaseExtendedService } from 'src/app/shared/services/firebase-extended.service';
 import { PageLoaderService } from 'src/app/shared/services/page-loader.service';
+import { PersonalMetaTagsService } from 'src/app/shared/services/personal-meta-tags.service';
 import { PdfComponent } from './components/pdf/pdf.component';
 import { Certification, Curriculum } from './models/curriculum.model';
 
@@ -34,18 +35,21 @@ export class CurriculumComponent implements OnInit, OnDestroy {
     private db: FirebaseExtendedService,
     private route: ActivatedRoute,
     private cdRef: ChangeDetectorRef,
-		private pageLoader: PageLoaderService
+		private pageLoader: PageLoaderService,
+		private meta: PersonalMetaTagsService,
   ) { }
 
 	ngOnInit(): void {
 		this.pageLoader.show(false);
     const id = this.route.snapshot.data['id'];
     this.cvSub = this.db.getDoc<Curriculum>(`cv/${id}`)
-      .pipe(
+			.pipe(
+				take(1),
         switchMap(cv => {
           if (!cv) return of(undefined);
           return this.db.getCol<Certification>(`cv/${id}/certs`)
-            .pipe(
+						.pipe(
+							take(1),
               map(certs => {
                 const normCerts: Curriculum['certs'] = certs.sort((a, b) => (a.isPro ? a?.priority || 40 : 50) - (b.isPro ? b?.priority || 40 : 50));
                 let normCv: Curriculum = {
@@ -56,10 +60,13 @@ export class CurriculumComponent implements OnInit, OnDestroy {
                   })),
                 };
                 normCv = {...normCv, desc: normCv.desc.replace('{age}', this.normAge(normCv.birthday.toDate()) + '')};
-                const res: Curriculum = { ...normCv, certs: normCerts };
+								const res: Curriculum = { ...normCv, certs: normCerts };
+								this.meta.update({
+									title: `About Us - ${res.name}`,
+									description: res.desc,
+								})
                 return res;
 							}),
-							take(1),
             );
         }),
       ).subscribe(dbCurriculum => {
