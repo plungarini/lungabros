@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
-import { Observable, Subscription, map } from 'rxjs';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { UsersService } from 'src/app/auth/services/users.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { UsersService } from 'src/app/auth/services/users.service';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnDestroy {
   menuOpen = false;
   menuAnimationOpen = false;
 
@@ -25,16 +25,22 @@ export class NavbarComponent {
     { name: 'Contatti', url: 'contact' },
   ];
 
-  userSub: Subscription | undefined;
-	isUserAdmin$: Observable<boolean>;
+	private isUserAdmin$ = new BehaviorSubject<boolean>(false);
+	isUserAdmin: Observable<boolean> = this.isUserAdmin$.asObservable();
+
+	private userSub: Subscription;
 
   constructor(
 		private cdRef: ChangeDetectorRef,
     private userService: UsersService,
 	) {
-		this.isUserAdmin$ = this.userService.getCurrentUserDb().pipe(
-			map((u) => u?.roles?.admin || false)
-		)
+		this.userSub = this.userService.getCurrentUserDb().subscribe(u => {
+			this.isUserAdmin$.next(u?.roles?.admin || false);
+		})
+	}
+
+	ngOnDestroy(): void {
+		this.userSub?.unsubscribe();
 	}
 
   toggleMenu(state?: boolean): void {

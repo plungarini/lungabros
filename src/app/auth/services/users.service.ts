@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { user } from '@angular/fire/auth';
 import { getAuth, User } from '@firebase/auth';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, of, switchMap, take } from 'rxjs';
 import { FirebaseExtendedService } from 'src/app/shared/services/firebase-extended.service';
 import { User as DbUser } from '../models/user.model';
 
@@ -89,8 +89,9 @@ export class UsersService {
    * Get current user from db.
    */
   getCurrentUserDb(): Observable<DbUser | undefined> {
-    return this.getCurrentFire()
-      .pipe(
+		return this.getCurrentFire()
+			.pipe(
+				take(1),
         switchMap((fireUser) => this.get(fireUser?.uid))
       );
   }

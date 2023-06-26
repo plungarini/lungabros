@@ -26,17 +26,14 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
+              "src/lungabros.ico",
               "src/assets",
-              "src/manifest.webmanifest",
               "src/sitemap.xml"
             ],
             "styles": [
               "src/styles.scss"
             ],
             "scripts": [],
-            "serviceWorker": true,
-            "ngswConfigPath": "ngsw-config.json",
             "allowedCommonJsDependencies": [
               "imgix-core-js",
 							"lodash",
@@ -108,9 +105,8 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/manifest.webmanifest"
+              "src/lungabros.ico",
+              "src/assets"
             ],
             "styles": [
               "src/styles.scss"
@@ -170,6 +166,7 @@
     				"serverTarget": "lungabros:server:production",
             "routes": [
               "/",
+							"login",
               "auth/login",
               "contact",
 							"articles/importanza-della-sicurezza",
