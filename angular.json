@@ -95,6 +95,25 @@
             "browserTarget": "lungabros:build"
           }
         },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/lungabros.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
@@ -147,6 +166,7 @@
     				"serverTarget": "lungabros:server:production",
             "routes": [
               "/",
+							"login",
               "auth/login",
               "contact",
 							"articles/importanza-della-sicurezza",

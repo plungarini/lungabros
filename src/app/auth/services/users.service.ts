@@ -89,8 +89,9 @@ export class UsersService {
    * Get current user from db.
    */
   getCurrentUserDb(): Observable<DbUser | undefined> {
-    return this.getCurrentFire()
-      .pipe(
+		return this.getCurrentFire()
+			.pipe(
+				take(1),
         switchMap((fireUser) => this.get(fireUser?.uid))
       );
   }
