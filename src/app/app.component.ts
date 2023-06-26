@@ -1,6 +1,6 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NavigationEnd, NavigationStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
-import { BehaviorSubject, Observable, Subscription, filter } from 'rxjs';
+import { BehaviorSubject, filter, Observable, Subscription } from 'rxjs';
 import { PageLoaderService } from './shared/services/page-loader.service';
 import { PersonalMetaTagsService } from './shared/services/personal-meta-tags.service';
 
@@ -11,7 +11,7 @@ import { PersonalMetaTagsService } from './shared/services/personal-meta-tags.se
   templateUrl: './app.component.html',
   styles: []
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements OnDestroy {
   routerSub: Subscription | undefined;
   showLoader = true;
 	firstStart = true;
@@ -58,33 +58,9 @@ export class AppComponent implements AfterViewInit {
       });
 	}
 
-	// Remove service worker and clean cache
-	ngAfterViewInit(): void {
-		try {
-			if (!window) {
-				console.error('No "window" element in the document');
-				return;
-			} else {
-				console.log('Window is defined, deleting cache...');
-				if ('caches' in window) {
-					caches.keys().then(function(keyList) {
-						return Promise.all(keyList.map(function(key) {
-							return caches.delete(key);
-						}));
-					})
-				}
-		
-				if(window?.navigator && navigator?.serviceWorker) {
-					navigator.serviceWorker.getRegistrations().then(function(registrations) {
-						for(let registration of registrations) {
-							registration.unregister();
-						}
-					});
-				}
-			}
-		} catch (err) {
-			console.error(err);
-		}
-
+	ngOnDestroy(): void {
+		this.showNavbarSubject.complete();
+		this.routerSub?.unsubscribe();
 	}
+
 }
