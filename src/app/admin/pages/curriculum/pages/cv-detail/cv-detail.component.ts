@@ -180,6 +180,8 @@ export class CvDetailComponent implements OnInit {
                 ? 'Francese'
                 : l.flag === 'de'
                 ? 'Tedesco'
+                : l.flag === 'es'
+                ? 'Spagnolo'
                 : '',
           })) || [],
       },
