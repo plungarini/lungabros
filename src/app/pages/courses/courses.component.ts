@@ -24,6 +24,10 @@ export class CoursesComponent implements OnInit, OnDestroy {
   ) { }
 
 	ngOnInit(): void {
+		this.meta.update({
+			title: 'I nostri corsi',
+			description: 'Esplora le meraviglie sottomarine con i nostri corsi subacquei. Dalla formazione di base all\'avventura esperta, scopri un nuovo mondo sotto le onde. Unisciti a noi per un\'immersione emozionante!'
+		});
 		this.headerSub = this.headerService.header.subscribe((header) => {
 			this.title = header.title;
       this.imgPath = header.bgImg;
@@ -32,7 +36,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
 				title: this.title,
 				description: header.description,
 				img: 'https://lungabros.imgix.net/' + header.bgImg + '?auto=format%2Ccompress&w=1200'
-			})
+			});
       this.cdRef.detectChanges();
 			this.pageLoader.show(false);
     });
