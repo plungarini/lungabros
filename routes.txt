@@ -15,5 +15,6 @@
 /courses/info/ppb
 /courses/info/rescue
 /courses/info/search-recovery
+/courses/info/shark
 /courses/info/underwater-navigator
 /courses/info/wreck
