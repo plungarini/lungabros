@@ -121,6 +121,11 @@
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
+		<loc>https://lungabros.it/courses/info/shark</loc>
+		<priority>0.8</priority>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
 		<loc>https://lungabros.it/courses/info/underwater-navigator</loc>
 		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
