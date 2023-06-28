@@ -1,5 +1,6 @@
 /courses/info/advanced-open-water
 /courses/info/boat
+/courses/info/bubblemaker
 /courses/info/deep
 /courses/info/discover-scuba
 /courses/info/divemaster
