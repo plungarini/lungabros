@@ -46,6 +46,11 @@
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
+		<loc>https://lungabros.it/courses/info/bubblemaker</loc>
+		<priority>0.8</priority>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
 		<loc>https://lungabros.it/courses/info/deep</loc>
 		<priority>0.8</priority>
 		<changefreq>weekly</changefreq>
