@@ -15,6 +15,7 @@
 /courses/info/open-water
 /courses/info/ppb
 /courses/info/rescue
+/courses/info/seal-team
 /courses/info/search-recovery
 /courses/info/shark
 /courses/info/underwater-navigator
