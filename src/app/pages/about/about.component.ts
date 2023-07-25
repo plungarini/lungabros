@@ -23,7 +23,10 @@ export class AboutComponent implements OnInit {
 	
 	ngOnInit(): void {
 		this.pageLoader.show(false);
-		this.meta.update({ title: 'About us' })
+		this.meta.update({
+			title: 'About us',
+			description: 'Siamo due fratelli che hanno scoperto la subaquea nel 2018 durante una vacanza. Non avevamo idea prima di quella vacanza che ci si potesse immergere con così tanta facilità e negli anni abbiamo trasformato la subacquea in una passione e successivamente in un lavoro.'
+		})
 	}
 
 }
