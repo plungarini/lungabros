@@ -3,11 +3,12 @@ import {
 	ChangeDetectorRef,
 	Component,
 	OnDestroy,
-	OnInit,
+	OnInit
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription, take } from 'rxjs';
 import { FirebaseExtendedService } from 'src/app/shared/services/firebase-extended.service';
+import { PersonalMetaTagsService } from 'src/app/shared/services/personal-meta-tags.service';
 import { Course } from '../../../../shared/models/course.model';
 import { CourseFilters } from '../../models/course-filters.model';
 import { HeaderService } from '../../services/header.service';
@@ -42,21 +43,30 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   constructor(
     private db: FirebaseExtendedService,
     private headerService: HeaderService,
-    private cdRef: ChangeDetectorRef
-  ) {}
+		private cdRef: ChangeDetectorRef,
+		private meta: PersonalMetaTagsService,
+	) {
+		this.meta.setCourseList([]);
+	}
 
   ngOnInit(): void {
 		this.headerService.setHeader({
 			title: this.title,
 			bgImg: this.imgPath,
-			subtitle: this.subtitle
+			subtitle: this.subtitle,
 		});
     this.cdRef.detectChanges();
 
     this.courseSub = this.db.getCol<Course>('courses').pipe(take(1)).subscribe((courses) => {
       this.courseLoaded = true;
       this.courseList = this.sortCourses(courses.filter((c) => !c.hide));
-      this.filterSidebar(this.filters);
+			this.filterSidebar(this.filters);
+			this.meta.setCourseList(this.courseList.map((c) => ({
+				title: c.title,
+				img: 'https://lungabros.imgix.net/' + c.bgImg + '?auto=format%2Ccompress&w=1200',
+				createdAt: c.createdAt?.toDate().toISOString() || new Date().toISOString(),
+				description: c.shortDesc,
+			})));
     });
 
     this.searchSub = this.searchBar.valueChanges.subscribe((value) => {

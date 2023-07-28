@@ -33,7 +33,7 @@ export class SicurezzaComponent implements OnInit {
 		this.meta.setArticle({
 			title: 'L\'importanza della sicurezza',
 			description: 'Scopri l\'importanza della sicurezza subacquea e perché la subacquea rimane una delle attività più divertenti in vacanza. Conosci le associazioni che hanno contribuito alla sicurezza subacquea e i 5 punti per essere un buon subacqueo.',
-			publishedTime: new Date('2023-06-10').toISOString(),
+			createdAt: new Date('2023-06-10').toISOString(),
 			tags: [
 				'sicurezza subacquea',
 				'subacquea come attività divertente',

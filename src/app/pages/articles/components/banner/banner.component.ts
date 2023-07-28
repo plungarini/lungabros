@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-banner',
+  selector: 'app-banner-articles',
   templateUrl: './banner.component.html',
   styles: [
     `

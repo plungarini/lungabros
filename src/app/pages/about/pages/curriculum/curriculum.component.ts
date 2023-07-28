@@ -61,9 +61,30 @@ export class CurriculumComponent implements OnInit, OnDestroy {
                 };
                 normCv = {...normCv, desc: normCv.desc.replace('{age}', this.normAge(normCv.birthday.toDate()) + '')};
 								const res: Curriculum = { ...normCv, certs: normCerts };
-								this.meta.update({
+								this.meta.setPerson({
 									title: `About Us - ${res.name}`,
 									description: res.desc,
+									name: res.name,
+									email: res.contacts.email,
+									phone: res.contacts.phone,
+									img: res.name.toLowerCase().trim().replaceAll(' ', '_'),
+									jobTitle: 'Open Water Scuba Instructor',
+									languages: ['IT', 'EN'],
+									socials: res.specs.socials.map(s => {
+										switch (s.id) {
+											case 'fb':
+												return 'https://www.facebook.com/' + s.username;
+											case 'ig':
+												return 'https://www.instagram.com/' + s.username;
+											case 'in':
+												return 'https://www.linkedin.com/in/' + s.username;
+											case 'tw':
+												return 'https://twitter.com/' + s.username;
+										
+											default:
+												return '';
+										}
+									}).filter(s => !!s),
 								})
                 return res;
 							}),

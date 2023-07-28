@@ -6,6 +6,7 @@ import {
 } from '@angular/router';
 import { Observable, take } from 'rxjs';
 import { FirebaseExtendedService } from 'src/app/shared/services/firebase-extended.service';
+import { PersonalMetaTagsService } from 'src/app/shared/services/personal-meta-tags.service';
 import { Course } from '../../../shared/models/course.model';
 
 @Injectable({
@@ -13,14 +14,17 @@ import { Course } from '../../../shared/models/course.model';
 })
 export class CoursesResolver implements Resolve<Course | undefined> {
 
-  constructor(private db: FirebaseExtendedService) {}
+	constructor(
+		private db: FirebaseExtendedService,
+		private meta: PersonalMetaTagsService,
+	) { }
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<Course | undefined> {
     const id = route.paramMap.get('id');
-    const course = this.db.getDoc<Course>(`courses/${id}`).pipe(take(1))
+		const course = this.db.getDoc<Course>(`courses/${id}`).pipe(take(1));
     return course;
   }
 }

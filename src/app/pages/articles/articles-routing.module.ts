@@ -16,7 +16,12 @@ const routes: Routes = [
       {
         path: 'torchbearers',
         component: TorchbearerComponent,
-      },
+			},
+			{
+				path: '**',
+				redirectTo: 'importanza-della-sicurezza',
+				pathMatch: 'full',
+			}
     ],
   },
 ];

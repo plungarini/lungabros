@@ -30,7 +30,7 @@ export class TorchbearerComponent implements OnInit {
 		this.meta.setArticle({
 			title: 'Proteggere gli oceani: 5 modi per fare la differenza',
 			description: 'Scopri come fare la tua parte nella conservazione degli oceani. Da subacquei esperti, ti presentiamo cinque modi per proteggere gli oceani, incluso l\'utilizzo dei principi del Leave No Trace, la partecipazione a iniziative di pulizia dei fondali e molto altro.',
-			publishedTime: new Date('2023-06-15').toISOString(),
+			createdAt: new Date('2023-06-15').toISOString(),
 			tags: [
 				'oceani',
 				'conservazione',

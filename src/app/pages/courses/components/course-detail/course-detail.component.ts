@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PageLoaderService } from 'src/app/shared/services/page-loader.service';
+import { PersonalMetaTagsService } from 'src/app/shared/services/personal-meta-tags.service';
 import { Course } from '../../../../shared/models/course.model';
 import { HeaderService } from '../../services/header.service';
 
@@ -19,6 +20,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
     private headerService: HeaderService,
 		private cdRef: ChangeDetectorRef,
 		private pageLoader: PageLoaderService,
+		private meta: PersonalMetaTagsService,
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +31,12 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
 				title: this.course.title,
 				bgImg: this.course.bgImg,
 				description: this.course.shortDesc,
+			});
+			this.meta.setCourse({
+				title: this.course.title,
+				description: this.course.shortDesc,
+				img: 'https://lungabros.imgix.net/' + this.course.bgImg + '?auto=format%2Ccompress&w=1200',
+				createdAt: this.course.createdAt?.toDate().toISOString() || new Date().toISOString(),
 			});
       this.cdRef.detectChanges();
 			this.pageLoader.show(false);
