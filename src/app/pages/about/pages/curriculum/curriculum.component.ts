@@ -37,29 +37,26 @@ export class CurriculumComponent implements OnInit, OnDestroy {
     private cdRef: ChangeDetectorRef,
 		private pageLoader: PageLoaderService,
 		private meta: PersonalMetaTagsService,
-  ) { }
-
-	ngOnInit(): void {
-		this.pageLoader.show(false);
-    const id = this.route.snapshot.data['id'];
-    this.cvSub = this.db.getDoc<Curriculum>(`cv/${id}`)
+	) {
+		const id = this.route.snapshot.data['id'];
+		this.cvSub = this.db.getDoc<Curriculum>(`cv/${id}`)
 			.pipe(
 				take(1),
-        switchMap(cv => {
-          if (!cv) return of(undefined);
-          return this.db.getCol<Certification>(`cv/${id}/certs`)
+				switchMap(cv => {
+					if (!cv) return of(undefined);
+					return this.db.getCol<Certification>(`cv/${id}/certs`)
 						.pipe(
 							take(1),
-              map(certs => {
-                const normCerts: Curriculum['certs'] = certs.sort((a, b) => (a.isPro ? a?.priority || 40 : 50) - (b.isPro ? b?.priority || 40 : 50));
-                let normCv: Curriculum = {
-                  ...cv,
-                  stories: cv?.stories.map(s => ({
-                    ...s,
-                    time: s.time ? s.time : Timestamp.fromDate(new Date())
-                  })),
-                };
-                normCv = {...normCv, desc: normCv.desc.replace('{age}', this.normAge(normCv.birthday.toDate()) + '')};
+							map(certs => {
+								const normCerts: Curriculum['certs'] = certs.sort((a, b) => (a.isPro ? a?.priority || 40 : 50) - (b.isPro ? b?.priority || 40 : 50));
+								let normCv: Curriculum = {
+									...cv,
+									stories: cv?.stories.map(s => ({
+										...s,
+										time: s.time ? s.time : Timestamp.fromDate(new Date())
+									})),
+								};
+								normCv = {...normCv, desc: normCv.desc.replace('{age}', this.normAge(normCv.birthday.toDate()) + '')};
 								const res: Curriculum = { ...normCv, certs: normCerts };
 								this.meta.setPerson({
 									title: `About Us - ${res.name}`,
@@ -85,21 +82,25 @@ export class CurriculumComponent implements OnInit, OnDestroy {
 												return '';
 										}
 									}).filter(s => !!s),
-								})
-                return res;
+								});
+								return res;
 							}),
-            );
-        }),
-      ).subscribe(dbCurriculum => {
-        this.curriculum = dbCurriculum;
-        this.curriculum?.stories.push({
-          title: 'La storia continua...',
-          desc: 'Questo è solo l\'inizio di ciò che vogliamo creare e speriamo davvero che tu ne possa fare parte assieme a noi :)',
-          isWorkingExperience: false,
-          time: Timestamp.fromDate(new Date()),
-        })
-        this.cdRef.detectChanges();
-      });
+						);
+				}),
+			).subscribe(dbCurriculum => {
+				this.curriculum = dbCurriculum;
+				this.curriculum?.stories.push({
+					title: 'La storia continua...',
+					desc: 'Questo è solo l\'inizio di ciò che vogliamo creare e speriamo davvero che tu ne possa fare parte assieme a noi :)',
+					isWorkingExperience: false,
+					time: Timestamp.fromDate(new Date()),
+				});
+				this.pageLoader.show(false);
+				this.cdRef.detectChanges();
+			});
+	}
+
+	ngOnInit(): void {
   }
 
   ngOnDestroy(): void {

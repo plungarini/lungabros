@@ -62,6 +62,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
       this.courseList = this.sortCourses(courses.filter((c) => !c.hide));
 			this.filterSidebar(this.filters);
 			this.meta.setCourseList(this.courseList.map((c) => ({
+				id: c.id,
 				title: c.title,
 				img: 'https://lungabros.imgix.net/' + c.bgImg + '?auto=format%2Ccompress&w=1200',
 				createdAt: c.createdAt?.toDate().toISOString() || new Date().toISOString(),

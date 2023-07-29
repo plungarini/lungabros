@@ -13,6 +13,7 @@ type UpdateArticleMetaTagsArgs = {
 	img?: string;
 }
 type UpdateCourseMetaTagsArgs = {
+	id: string;
 	title: string;
 	description?: string;
 	createdAt: string;
@@ -83,7 +84,11 @@ export class PersonalMetaTagsService {
 					"email": "pietro@lungabros.com",
 					"telephone": "+393349447086",
 					"knowsLanguage": ["IT", "EN"],
-					"affiliation": 'PADI',
+					"affiliation": {
+						"@type": "Organization",
+						"name": 'PADI',
+						"sameAs": 'https://www.padi.com/',
+					},
 					"birthDate": '1999-06-20',
 					"url": 'https://lungabros.it/about/pietro-lungarini',
 					"sameAs": [
@@ -102,7 +107,11 @@ export class PersonalMetaTagsService {
 					"email": "samuele@lungabros.com",
 					"telephone": "+393317595546",
 					"knowsLanguage": ["IT", "EN"],
-					"affiliation": 'PADI',
+					"affiliation": {
+						"@type": "Organization",
+						"name": 'PADI',
+						"sameAs": 'https://www.padi.com/',
+					},
 					"birthDate": '2004-05-06',
 					"url": 'https://lungabros.it/about/samuele-lungarini',
 					"sameAs": [
@@ -166,11 +175,12 @@ export class PersonalMetaTagsService {
 	setCourse(opt: UpdateCourseMetaTagsArgs): void {
 		const schema: CourseSchemaOrg = {
 			"@type": "Course",
+			"@id": `https://lungabros.it/courses/info/${opt.id}`,
 			"name": opt.title,
 			"description": opt.description || this.defaultDesc,
 			"datePublished": opt.createdAt,
 			"image": opt.img,
-			"url": 'https://lungabros.it' + this.router.url,
+			"url": `https://lungabros.it/courses/info/${opt.id}`,
 			"hasCourseInstance": {
 				"@type": "CourseInstance",
 				instructor: this.schema.founder
@@ -229,11 +239,12 @@ export class PersonalMetaTagsService {
 
 			const courseSchema: CourseSchemaOrg = {
 				"@type": "Course",
+				"@id": `https://lungabros.it/courses/info/${course.id}`,
 				"name": course.title,
 				"description": course.description || this.defaultDesc,
 				"datePublished": course.createdAt,
 				"image": course.img,
-				"url": 'https://lungabros.it' + this.router.url,
+				"url": `https://lungabros.it/courses/info/${course.id}`,
 				"hasCourseInstance": {
 					"@type": "CourseInstance",
 					instructor: this.schema.founder
@@ -247,7 +258,7 @@ export class PersonalMetaTagsService {
 
 			schema.itemListElement.push({
 				"@type": "ListItem",
-				position: i,
+				position: i + 1,
 				item: courseSchema,
 			});
 		}
@@ -336,6 +347,14 @@ export class PersonalMetaTagsService {
 		this.meta.updateTag({
 			name: 'twitter:title',
 			content: this.siteName + ' | ' + opt.title,
+		});
+		this.meta.updateTag({
+			name: 'twitter:site',
+			content: this.siteName,
+		});
+		this.meta.updateTag({
+			name: 'twitter:image',
+			content: opt.img || this.defaultOgImg,
 		});
 		this.meta.updateTag({
 			name: 'twitter:description',

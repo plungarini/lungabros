@@ -23,6 +23,7 @@ export interface CourseListSchemaOrg {
 
 export interface CourseSchemaOrg {
 	"@type"?: 'Course';
+	"@id"?: string;
 	name?: string;
 	description?: string;
 	image?: string;
@@ -65,7 +66,11 @@ export interface PersonSchemaOrg {
 	url?: string;
 	knowsLanguage?: string[];
 	sameAs?: string[];
-	affiliation?: 'PADI';
+	affiliation?: {
+		"@type"?: 'Organization';
+		name?: 'PADI';
+		sameAs?: 'https://www.padi.com/';
+	};
 	birthDate?: string;
 	
 }

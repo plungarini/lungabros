@@ -21,7 +21,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
 		private cdRef: ChangeDetectorRef,
 		private pageLoader: PageLoaderService,
 		private meta: PersonalMetaTagsService,
-  ) { }
+	) { }
 
   ngOnInit(): void {
     this.courseSub = this.route.data.subscribe(({ course }) => {
@@ -33,6 +33,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
 				description: this.course.shortDesc,
 			});
 			this.meta.setCourse({
+				id: course.id,
 				title: this.course.title,
 				description: this.course.shortDesc,
 				img: 'https://lungabros.imgix.net/' + this.course.bgImg + '?auto=format%2Ccompress&w=1200',
