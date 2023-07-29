@@ -1,0 +1,7 @@
+# LungaBROS Robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://lungabros.it/sitemap.xml

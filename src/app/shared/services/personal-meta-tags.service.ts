@@ -149,17 +149,20 @@ export class PersonalMetaTagsService {
 		};
 
 		this.meta.addTags([
-			{ name: 'og:title', content: this.siteName + ' | Your diving experience.' },
-			{ name: 'og:description', content: opt.description },
-			{ name: 'og:site_name', content: this.siteName },
-			{ name: 'og:url', content: 'https://lungabros.it/' },
-			{ name: 'og:type', content: 'website' },
-			{ name: 'og:locale', content: 'it_IT' },
+			{ property: 'og:title', content: this.siteName + ' | Your diving experience.' },
+			{ property: 'og:description', content: opt.description },
+			{ property: 'og:site_name', content: this.siteName },
+			{ property: 'og:url', content: 'https://lungabros.it/' },
+			{ property: 'og:type', content: 'website' },
+			{ property: 'og:locale', content: 'it_IT' },
+			{ property: 'fb:app_id', content: '1049725339732847' },
 			{ name: 'keywords', content: 'immersione subacquea, mondo sommerso, corsi subacquei, diving course, brevetto sub padi, brevetto padi open water, orca diving center puglia, orca diving center torre lapillo, snorkeling torre lapillo, torre lapillo snorkeling, corso blsd riconosciuto, lunga bros, corsi, subacquei, orcadivingcenter, orca, diving, torre lapillo, puglia, corso blsd, diving club, e-learning, elearning, diving salento, immersioni puglia, diving service, corso scuba diver, corso sub lecce, immersioni salento, diving salento relitti, esame divemaster padi, padi, padi open water, corsi padi, padi pros, domande esame rescue padi, brevetto sub livelli, subacqueo professionista, certificazione subacquea, corsi PADI, istruttori PADI, avventure subacquee, sicurezza subacquea, preservazione degli oceani, passione per l\'immersione, standard di sicurezza, PADI AWARE' },
-			{ name: 'og:image', content: this.defaultOgImg },
-			{ name: 'og:image:width', content: '1179' },
-			{ name: 'og:image:height', content: '630' },
+			{ property: 'og:image', content: this.defaultOgImg },
+			{ property: 'og:image:width', content: '1179' },
+			{ property: 'og:image:height', content: '630' },
 			{ name: 'twitter:card', content: 'summary' },
+			{ name: 'twitter:site', content: this.siteName },
+			{ name: 'twitter:image', content: this.defaultOgImg },
 			{ name: 'twitter:title', content: this.siteName + ' | Your diving experience.' },
 			{ name: 'twitter:description', content: opt.description },
 		]);
@@ -329,7 +332,7 @@ export class PersonalMetaTagsService {
 			content: opt.type || 'website',
 		});
 		this.meta.updateTag({
-			name: 'og:title',
+			property: 'og:title',
 			content: opt.title,
 		});
 		this.meta.updateTag({
@@ -337,12 +340,12 @@ export class PersonalMetaTagsService {
 			content: opt.description || this.defaultDesc,
 		});
 		this.meta.updateTag({
-			name: 'og:description',
+			property: 'og:description',
 			content: opt.description || this.defaultDesc,
 		});
 		this.meta.updateTag({
-			name: 'og:type',
-			content: opt.type || 'website',
+			property: 'og:type',
+			content: opt.type === 'article' ? 'article' : 'website',
 		});
 		this.meta.updateTag({
 			name: 'twitter:title',
@@ -361,11 +364,11 @@ export class PersonalMetaTagsService {
 			content: opt.description || this.defaultDesc,
 		});
 		this.meta.updateTag({
-			name: 'og:image',
+			property: 'og:image',
 			content: opt.img || this.defaultOgImg,
 		});
 		this.meta.updateTag({
-			name: 'og:url',
+			property: 'og:url',
 			content: 'https://lungabros.it' + this.router.url,
 		});
 	}
