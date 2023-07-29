@@ -309,15 +309,7 @@ export class PersonalMetaTagsService {
 	 * @param {GeneralTags} opt - The options for updating the meta tags and title.
 	 */
 	private _update(opt: GeneralTags): void {
-		let canonical = this.document.getElementById('canonical') as HTMLLinkElement | null;
-		if (!canonical) {
-			canonical = this.document.createElement('link');
-		}
-
-		canonical.rel = 'canonical';
-		canonical.href = 'https://lungabros.it' + this.router.url;
-		canonical.id = 'canonical';
-
+		this.setCanonical();
 
 		this.title.setTitle(this.siteName + ' | ' + opt.title);
 		
@@ -359,13 +351,30 @@ export class PersonalMetaTagsService {
 		});
 	}
 
+	private setCanonical(): void {
+		let canonical = this.document.getElementById('canonical') as HTMLLinkElement | null;
+		if (!canonical) {
+			canonical = this.document.createElement('link');
+		}
+
+		canonical.rel = 'canonical';
+		canonical.href = 'https://lungabros.it' + this.router.url;
+		canonical.id = 'canonical';
+
+		if (this.document.head.firstChild) {
+			this.document.head.insertBefore(canonical, this.document.head.firstChild);
+		} else {
+			this.document.head.appendChild(canonical);
+		}
+	}
+
 	/**
 	 * Appends an item to the schema by creating or updating a <script> element in the document's head.
 	 *
 	 * @param {SchemaOrg | CourseSchemaOrg | ArticleSchemaOrg | CourseListSchemaOrg | PersonSchemaOrg} item - The item to append to the schema.
 	 * @param {boolean} isDefault - Whether the item is the default item or not. Default: false.
 	 */
-	private append(item: SchemaOrg | CourseSchemaOrg | ArticleSchemaOrg | CourseListSchemaOrg | PersonSchemaOrg, isDefault = false): void {
+	private append(item: SchemaOrg | CourseSchemaOrg | ArticleSchemaOrg | CourseListSchemaOrg | PersonSchemaOrg, isDefault: boolean = false): void {
 		let script = this.document.getElementById('schema') as HTMLScriptElement | null;
 		if (!script) {
 			script = this.document.createElement('script');
