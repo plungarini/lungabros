@@ -13,7 +13,7 @@ export class HomeComponent {
 		private meta: PersonalMetaTagsService,
 	) {
 		this.meta.update({
-			title: 'Your diving experience.',
+			title: 'Lunga BROS | Your diving experience.',
 		})
 	}
 

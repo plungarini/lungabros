@@ -65,8 +65,6 @@ export class PersonalMetaTagsService {
 	init(opt: InitMetaTagsArgs): void {
 		this.defaultDesc = opt.description;
 
-		this.title.setTitle(this.siteName + ' | Your diving experience.');
-
 		this.schema = {
 			"@type": "Organization",
 			"name": this.siteName,
@@ -167,7 +165,7 @@ export class PersonalMetaTagsService {
 			{ name: 'twitter:description', content: opt.description },
 		]);
 
-		this.update({ ...opt, title: 'Your diving experience.' });
+		this.update({ ...opt, title: this.siteName + ' | Your diving experience.' });
 	}
 
 	/**
@@ -325,7 +323,7 @@ export class PersonalMetaTagsService {
 	private _update(opt: GeneralTags): void {
 		this.setCanonical();
 
-		this.title.setTitle(this.siteName + ' | ' + opt.title);
+		this.title.setTitle(opt.title);
 		
 		this.meta.updateTag({
 			name: '@type',
@@ -349,7 +347,7 @@ export class PersonalMetaTagsService {
 		});
 		this.meta.updateTag({
 			name: 'twitter:title',
-			content: this.siteName + ' | ' + opt.title,
+			content: opt.title,
 		});
 		this.meta.updateTag({
 			name: 'twitter:site',
